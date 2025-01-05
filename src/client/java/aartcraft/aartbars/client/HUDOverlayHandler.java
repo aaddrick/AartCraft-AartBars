@@ -106,13 +106,14 @@ public class HUDOverlayHandler
                                        int top,
                                        float alpha) {
 
-
         int iconSize = 9;
         int spacing = 0;
         int iconsPerRow = 10;
 
         int rows = (int) Math.ceil((float) stuckarrows / iconsPerRow);
-        int startX = right - (iconsPerRow * (iconSize + spacing)) + iconSize;
+        // Start from left edge instead of right
+        int startX = right - (iconsPerRow * (iconSize + spacing));
+        // Start from top and move upwards for new rows
         int startY = top - (rows * (iconSize + spacing));
 
         enableAlpha(alpha);
@@ -123,7 +124,9 @@ public class HUDOverlayHandler
             int row = i / iconsPerRow;
             int col = i % iconsPerRow;
 
+            // Calculate position left-to-right
             int x = startX + col * (iconSize + spacing);
+            // Calculate position from top down (subtract row height)
             int y = startY + row * (iconSize + spacing);
 
             if (ticks - arrowAppearTick < SHAKE_DURATION) {

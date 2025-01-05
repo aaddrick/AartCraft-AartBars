@@ -29,6 +29,8 @@ public class HUDOverlayHandler
         INSTANCE = new HUDOverlayHandler();
         // Add logging for ARROW_TEXTURE
         AartBars.LOGGER.info("Arrow texture path: {}", INSTANCE.ARROW_TEXTURE);
+        AartBars.LOGGER.info("Is namespace valid? " + Identifier.isNamespaceValid(AartBars.MOD_ID));
+        AartBars.LOGGER.info("Is path valid? " + Identifier.isPathValid("textures/arrowsprite.png"));
         // Register the event listener
         HUDOverlayEvent.StuckArrows.EVENT.register(INSTANCE::onStuckArrowsRender);
     }
@@ -105,8 +107,8 @@ public class HUDOverlayHandler
                                        float alpha) {
 
 
-        int iconSize = 32;
-        int spacing = 2;
+        int iconSize = 9;
+        int spacing = 0;
         int iconsPerRow = 10;
 
         int rows = (int) Math.ceil((float) stuckarrows / iconsPerRow);
@@ -129,13 +131,14 @@ public class HUDOverlayHandler
                 y += random.nextInt(3) - 1;
             }
 
-            context.drawGuiTexture(
+            context.drawTexture(
                     RenderLayer::getGuiTextured,
-                    TextureHelper.ARROW_SPRITE,
-                    16, 16, // Texture Width, Height
-                    0,0, // U, V
-                    x, y, // Screen X, Screen Y
-                    iconSize, iconSize // Rendered Width, Height
+                    ARROW_TEXTURE,
+                    x, y,
+                    0f, 0f,
+                    9, 9,
+                    iconSize, iconSize,
+                    9, 9
                     );
         }
         disableAlpha();

@@ -32,7 +32,8 @@ public class AartBarsClient implements ClientModInitializer {
             });
 
             LOGGER.info("Aartcraft ArrowHUD client initialized successfully");
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             LOGGER.error("Failed to initialize Aartcraft ArrowHUD client", e);
             throw e;
         }

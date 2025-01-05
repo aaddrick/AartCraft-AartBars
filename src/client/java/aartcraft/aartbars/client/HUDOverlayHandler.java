@@ -137,9 +137,9 @@ public class HUDOverlayHandler
                     TextureHelper.ARROW_SPRITE,
                     x, y,
                     0f, 0f,
-                    9, 9,
+                    8, 8,
                     iconSize, iconSize,
-                    9, 9
+                    8, 8
                     );
         }
         disableAlpha();

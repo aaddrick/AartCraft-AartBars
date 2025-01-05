@@ -1,8 +1,11 @@
 package aartcraft.aartbars.client;
 
+import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AartBarsClient implements ClientModInitializer {
 

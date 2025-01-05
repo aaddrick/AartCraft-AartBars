@@ -27,6 +27,8 @@ public class HUDOverlayHandler
     public static void init()
     {
         INSTANCE = new HUDOverlayHandler();
+        // Add logging for ARROW_TEXTURE
+        AartBars.LOGGER.info("Arrow texture path: {}", INSTANCE.ARROW_TEXTURE);
         // Register the event listener
         HUDOverlayEvent.StuckArrows.EVENT.register(INSTANCE::onStuckArrowsRender);
     }

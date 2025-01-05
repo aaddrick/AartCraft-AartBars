@@ -1,0 +1,35 @@
+package aartcraft.aartbars.client;
+
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.MinecraftClient;
+
+public class AartBarsClient implements ClientModInitializer {
+
+    @Override
+    public void onInitializeClient() {
+        try {
+            LOGGER.info("Initializing Aartcraft ArrowHUD client");
+
+            // Register HUD render callback
+            HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
+                HUDOverlayHandler.INSTANCE.onRender(drawContext);
+            });
+
+            // Initialize the HUD overlay handler
+            HUDOverlayHandler.init();
+
+            // Register event handlers
+            HUDOverlayEvent.StuckArrows.EVENT.register(event -> {
+                if (!event.isCanceled) {
+                    HUDOverlayHandler.INSTANCE.drawStuckArrowsOverlay(event, MinecraftClient.getInstance(), 1f);
+                }
+            });
+
+            LOGGER.info("Aartcraft ArrowHUD client initialized successfully");
+        } catch (Exception e) {
+            LOGGER.error("Failed to initialize Aartcraft ArrowHUD client", e);
+            throw e;
+        }
+    }
+}

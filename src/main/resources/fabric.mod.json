@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "aartbars",
+  "version": "${version}",
+  "name": "AartBars",
+  "description": "HUD Bars, for Aart",
+  "authors": ["aaddrick"],
+  "contact": {},
+  "license": "unlicense",
+  "icon": "assets/aartbars/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "aartcraft.aartbars.client.AartBarsClient"
+    ],
+    "main": [
+      "aartcraft.aartbars.AartBars"
+    ]
+  },
+  "mixins": [
+    "aartbars.mixins.json",
+    {
+      "config": "aartbars.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

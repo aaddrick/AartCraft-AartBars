@@ -1,5 +1,6 @@
 package aartcraft.aartbars.client;
 
+import aartcraft.aartbars.AartBars;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import aartcraft.aartbars.helpers.TextureHelper;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -8,11 +9,14 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 
 import java.util.Random;
 
 public class HUDOverlayHandler
 {
+    private final Identifier ARROW_TEXTURE = Identifier.of(AartBars.MOD_ID, "textures/arrowsprite.png");
+
     public static HUDOverlayHandler INSTANCE;
 
     private int arrowAppearTick = 0; // Tracks the game tick when arrows first appeared
@@ -126,14 +130,10 @@ public class HUDOverlayHandler
             context.drawGuiTexture(
                     RenderLayer::getGuiTextured,
                     TextureHelper.ARROW_SPRITE,
-                    9, // Texture width
-                    9, // Texture height
-                    0,  // U (texture X coordinate)
-                    0,  // V (texture Y coordinate)
-                    x,  // Screen X coordinate
-                    y,  // Screen Y coordinate
-                    iconSize, // Rendered width
-                    iconSize  // Rendered height
+                    16, 16, // Texture Width, Height
+                    0,0, // U, V
+                    x, y, // Screen X, Screen Y
+                    iconSize, iconSize // Rendered Width, Height
                     );
         }
         disableAlpha();

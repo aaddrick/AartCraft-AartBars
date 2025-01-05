@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AartBarsClient implements ClientModInitializer {
+    // Add this logger field
+    private static final Logger LOGGER = LoggerFactory.getLogger("AartBarsClient");
 
     @Override
     public void onInitializeClient() {

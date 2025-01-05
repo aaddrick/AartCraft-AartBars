@@ -15,8 +15,6 @@ import java.util.Random;
 
 public class HUDOverlayHandler
 {
-    private final Identifier ARROW_TEXTURE = Identifier.of(AartBars.MOD_ID, "textures/arrowsprite.png");
-
     public static HUDOverlayHandler INSTANCE;
 
     private int arrowAppearTick = 0; // Tracks the game tick when arrows first appeared
@@ -28,7 +26,7 @@ public class HUDOverlayHandler
     {
         INSTANCE = new HUDOverlayHandler();
         // Add logging for ARROW_TEXTURE
-        AartBars.LOGGER.info("Arrow texture path: {}", INSTANCE.ARROW_TEXTURE);
+        AartBars.LOGGER.info("Arrow texture path: {}", TextureHelper.ARROW_SPRITE);
         AartBars.LOGGER.info("Is namespace valid? " + Identifier.isNamespaceValid(AartBars.MOD_ID));
         AartBars.LOGGER.info("Is path valid? " + Identifier.isPathValid("textures/arrowsprite.png"));
         // Register the event listener
@@ -106,13 +104,13 @@ public class HUDOverlayHandler
                                        int top,
                                        float alpha) {
 
-        int iconSize = 9;
+        int iconSize = 8;
         int spacing = 0;
         int iconsPerRow = 10;
 
         int rows = (int) Math.ceil((float) stuckarrows / iconsPerRow);
         // Start from left edge instead of right
-        int startX = right - (iconsPerRow * (iconSize + spacing));
+        int startX = right;
         // Start from top and move upwards for new rows
         int startY = top - (rows * (iconSize + spacing));
 
@@ -125,7 +123,7 @@ public class HUDOverlayHandler
             int col = i % iconsPerRow;
 
             // Calculate position left-to-right
-            int x = startX + col * (iconSize + spacing);
+            int x = startX - col * (iconSize + spacing);
             // Calculate position from top down (subtract row height)
             int y = startY + row * (iconSize + spacing);
 
@@ -136,7 +134,7 @@ public class HUDOverlayHandler
 
             context.drawTexture(
                     RenderLayer::getGuiTextured,
-                    ARROW_TEXTURE,
+                    TextureHelper.ARROW_SPRITE,
                     x, y,
                     0f, 0f,
                     9, 9,

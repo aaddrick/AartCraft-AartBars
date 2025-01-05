@@ -25,15 +25,14 @@ public class AartBarsClient implements ClientModInitializer {
             HUDOverlayHandler.init();
 
             // Register event handlers
-            HUDOverlayEvent.StuckArrows.EVENT.register(event -> {
+            HUDOverlayEvent.StuckArrows.EVENT.register((event) -> {
                 if (!event.isCanceled) {
                     HUDOverlayHandler.INSTANCE.drawStuckArrowsOverlay(event, MinecraftClient.getInstance(), 1f);
                 }
             });
 
             LOGGER.info("Aartcraft ArrowHUD client initialized successfully");
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             LOGGER.error("Failed to initialize Aartcraft ArrowHUD client", e);
             throw e;
         }

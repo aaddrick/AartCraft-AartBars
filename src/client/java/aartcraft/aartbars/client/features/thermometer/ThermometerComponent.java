@@ -18,7 +18,7 @@ public class ThermometerComponent extends BaseHUDComponent {
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
         this.x = screenWidth / 2;
-        this.y = screenHeight / 2;
+        this.y = screenHeight / 2 - 90;
         
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerEntity player = mc.player;
@@ -26,7 +26,7 @@ public class ThermometerComponent extends BaseHUDComponent {
 
         BlockPos playerpos = BlockPos.ofFloored(player.getPos());
         float temperature = mc.world.getBiome(playerpos).value().getTemperature();
-        AartBars.LOGGER.info(String.valueOf(temperature));
+        // AartBars.LOGGER.info(String.valueOf(temperature));
         
         drawThermometer(context, temperature, x, y, alpha);
     }
@@ -43,8 +43,8 @@ public class ThermometerComponent extends BaseHUDComponent {
         enableAlpha(alpha);
         
         // Define min and max temperature range
-        float minTemperature = -1.0f;
-        float maxTemperature = 1.0f;
+        float minTemperature = -0.5f;
+        float maxTemperature = 1.5f;
         int numSegments = 7; // Number of thermometer segments
         
         // Calculate the sprite index programmatically

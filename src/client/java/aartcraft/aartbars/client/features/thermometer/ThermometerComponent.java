@@ -63,8 +63,8 @@ public class ThermometerComponent extends BaseHUDComponent {
             TextureHelper.THERMOMETER_SPRITE,
             x, y,
             spriteIndex * 15f, 0f, // Select sprite segment (15px wide)
-            15, 15, // Sprite size
-            105, 15 // Texture dimensions (7 segments * 15px = 105px)
+            15, 33, // Sprite size
+            105, 33 // Texture dimensions (7 segments * 15px = 105px)
         );
         disableAlpha();
     }

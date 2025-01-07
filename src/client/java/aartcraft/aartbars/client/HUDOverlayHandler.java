@@ -1,15 +1,18 @@
 package aartcraft.aartbars.client;
 
+import aartcraft.aartbars.api.AartcraftApi;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsComponent;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;
 import aartcraft.aartbars.client.components.HUDComponent;
+import aartcraft.aartbars.api.event.HUDOverlayEvent;
+import aartcraft.aartbars.api.handler.EventHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HUDOverlayHandler {
+public class HUDOverlayHandler implements AartcraftApi {
     public static HUDOverlayHandler INSTANCE;
     private final List<HUDComponent> components = new ArrayList<>();
 
@@ -26,8 +29,21 @@ public class HUDOverlayHandler {
         StuckArrowsEvent.EVENT.register(INSTANCE::onStuckArrowsRender);
     }
 
+    @Override
+    public void registerEvents() {
+        // Default implementation does nothing
+    }
+
+    @Override
     public void registerComponent(HUDComponent component) {
         components.add(component);
+    }
+
+    @Override
+    public <T extends HUDOverlayEvent> void registerEvent(Class<T> eventClass, EventHandler<T> handler) {
+        if (eventClass == StuckArrowsEvent.class) {
+            StuckArrowsEvent.EVENT.register(handler);
+        }
     }
 
     public void onRender(DrawContext context) {

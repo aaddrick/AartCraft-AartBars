@@ -5,6 +5,8 @@ import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsComponent;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;
 import aartcraft.aartbars.client.features.thermometer.ThermometerComponent;
 import aartcraft.aartbars.client.features.thermometer.ThermometerEvent;
+import aartcraft.aartbars.client.features.brokenblocktracker.BrokenBlockTrackerComponent;
+import aartcraft.aartbars.client.features.brokenblocktracker.BrokenBlockTrackerEvent;
 import aartcraft.aartbars.client.components.HUDComponent;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import aartcraft.aartbars.api.handler.EventHandler;
@@ -25,10 +27,13 @@ public class HUDOverlayHandler implements AartcraftApi {
         INSTANCE.registerComponent(new StuckArrowsComponent());
         // Register the thermometer component
         INSTANCE.registerComponent(new ThermometerComponent());
+        // Register the broken block tracker component
+        INSTANCE.registerComponent(new BrokenBlockTrackerComponent());
 
         // Register events
         StuckArrowsEvent.EVENT.register(INSTANCE::onStuckArrowsRender);
         ThermometerEvent.EVENT.register(INSTANCE::onThermometerRender);
+        BrokenBlockTrackerEvent.EVENT.register(INSTANCE::onBrokenBlockTrackerRender);
     }
 
     @Override
@@ -47,6 +52,8 @@ public class HUDOverlayHandler implements AartcraftApi {
             StuckArrowsEvent.EVENT.register((EventHandler<StuckArrowsEvent>) handler);
         } else if (eventClass == ThermometerEvent.class) {
             ThermometerEvent.EVENT.register((EventHandler<ThermometerEvent>) handler);
+        } else if (eventClass == BrokenBlockTrackerEvent.class) {
+            BrokenBlockTrackerEvent.EVENT.register((EventHandler<BrokenBlockTrackerEvent>) handler);
         }
     }
 
@@ -66,6 +73,12 @@ public class HUDOverlayHandler implements AartcraftApi {
     }
 
     public void onThermometerRender(ThermometerEvent event) {
+        for (HUDComponent component : components) {
+            component.handleEvent(event);
+        }
+    }
+
+    public void onBrokenBlockTrackerRender(BrokenBlockTrackerEvent event) {
         for (HUDComponent component : components) {
             component.handleEvent(event);
         }

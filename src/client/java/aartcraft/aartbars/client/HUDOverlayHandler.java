@@ -10,6 +10,8 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 
 import java.util.Random;
 
@@ -25,10 +27,6 @@ public class HUDOverlayHandler
     public static void init()
     {
         INSTANCE = new HUDOverlayHandler();
-        // Add logging for ARROW_TEXTURE
-        AartBars.LOGGER.info("Arrow texture path: {}", TextureHelper.ARROW_SPRITE);
-        AartBars.LOGGER.info("Is namespace valid? " + Identifier.isNamespaceValid(AartBars.MOD_ID));
-        AartBars.LOGGER.info("Is path valid? " + Identifier.isPathValid("textures/arrowsprite.png"));
         // Register the event listener
         HUDOverlayEvent.StuckArrows.EVENT.register(INSTANCE::onStuckArrowsRender);
     }
@@ -42,6 +40,11 @@ public class HUDOverlayHandler
         PlayerEntity player = mc.player;
         if (player == null)
             return;
+
+        BlockPos playerpos = BlockPos.ofFloored(player.getPos());
+
+        assert mc.world != null;
+        AartBars.LOGGER.info("Temperature: " + mc.world.getBiome(playerpos).value().getTemperature());
 
         int stuckarrows = player.getStuckArrowCount();
 
@@ -104,15 +107,15 @@ public class HUDOverlayHandler
                                        int top,
                                        float alpha) {
 
-        int iconSize = 9;
-        int spacing = 0;
+        int iconSize = 8;
+        int spacing = 2;
         int iconsPerRow = 10;
 
         int rows = (int) Math.ceil((float) stuckarrows / iconsPerRow);
         // Start from right edge minus one full row width
         int startX = right - (iconsPerRow * iconSize);
         // Start from top minus total height of all rows
-        int startY = top - (rows * iconSize);
+        int startY = top - (rows * (iconSize + spacing));
 
         enableAlpha(alpha);
 
@@ -125,7 +128,7 @@ public class HUDOverlayHandler
             // Calculate position right-to-left
             int x = startX + ((iconsPerRow - 1 - col) * iconSize);
             // Calculate position from top down
-            int y = startY + (row * iconSize);
+            int y = startY + (row * (iconSize+spacing));
 
             if (ticks - arrowAppearTick < SHAKE_DURATION) {
                 x += random.nextInt(3) - 1;
@@ -137,9 +140,9 @@ public class HUDOverlayHandler
                     TextureHelper.ARROW_SPRITE,
                     x, y,
                     0f, 0f,
-                    9, 9,
+                    8, 8,
                     iconSize, iconSize,
-                    9, 9
+                    8, 8
                     );
         }
         disableAlpha();

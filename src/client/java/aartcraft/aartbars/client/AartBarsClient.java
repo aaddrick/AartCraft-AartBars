@@ -25,9 +25,9 @@ public class AartBarsClient implements ClientModInitializer {
             LOGGER.info("ARROW_SPRITE: " + TextureHelper.ARROW_SPRITE);
 
             // Register event handlers
-            HUDOverlayEvent.StuckArrows.EVENT.register(event -> {
+            StuckArrowsEvent.EVENT.register(event -> {
                 if (!event.isCanceled) {
-                    HUDOverlayHandler.INSTANCE.drawStuckArrowsOverlay(event, MinecraftClient.getInstance(), 1f);
+                    HUDOverlayHandler.INSTANCE.onStuckArrowsRender(event);
                 }
             });
 

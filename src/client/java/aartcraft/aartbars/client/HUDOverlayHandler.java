@@ -42,7 +42,15 @@ public class HUDOverlayHandler implements AartcraftApi {
     @Override
     public <T extends HUDOverlayEvent> void registerEvent(Class<T> eventClass, EventHandler<T> handler) {
         if (eventClass == StuckArrowsEvent.class) {
-            StuckArrowsEvent.EVENT.register(handler);
+            StuckArrowsEvent.EVENT.register((EventHandler<StuckArrowsEvent>) handler);
+        }
+    }
+
+    public void drawStuckArrowsOverlay(StuckArrowsEvent event, MinecraftClient mc, float alpha) {
+        for (HUDComponent component : components) {
+            if (component instanceof StuckArrowsComponent) {
+                ((StuckArrowsComponent) component).drawStuckArrowsOverlay(event, mc, alpha);
+            }
         }
     }
 

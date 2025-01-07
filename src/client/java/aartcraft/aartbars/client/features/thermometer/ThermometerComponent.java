@@ -40,16 +40,31 @@ public class ThermometerComponent extends BaseHUDComponent {
     private void drawThermometer(DrawContext context, float temperature, int x, int y, float alpha) {
         enableAlpha(alpha);
         
-        // Map temperature to sprite index (0-7)
-        int spriteIndex = Math.min(6, Math.max(0, (int)(temperature * 7)));
+        // Map temperature from -1.0 to 1.0 to sprite index (0-6)
+        int spriteIndex;
+        if (temperature < -0.857f) { // -1.0 to -0.857
+            spriteIndex = 0; // Coldest
+        } else if (temperature < -0.571f) { // -0.857 to -0.571
+            spriteIndex = 1;
+        } else if (temperature < -0.285f) { // -0.571 to -0.285
+            spriteIndex = 2;
+        } else if (temperature < 0.0f) { // -0.285 to 0.0
+            spriteIndex = 3;
+        } else if (temperature < 0.285f) { // 0.0 to 0.285
+            spriteIndex = 4;
+        } else if (temperature < 0.571f) { // 0.285 to 0.571
+            spriteIndex = 5;
+        } else { // 0.571 to 1.0
+            spriteIndex = 6; // Hottest
+        }
         
         context.drawTexture(
             RenderLayer::getGuiTextured,
             TextureHelper.THERMOMETER_SPRITE,
             x, y,
-            spriteIndex * 15f, 0f, // Select sprite segment
-            15, 33, // Sprite size
-            105, 33 // Texture dimensions
+            spriteIndex * 15f, 0f, // Select sprite segment (15px wide)
+            15, 15, // Sprite size
+            105, 15 // Texture dimensions (7 segments * 15px = 105px)
         );
         disableAlpha();
     }

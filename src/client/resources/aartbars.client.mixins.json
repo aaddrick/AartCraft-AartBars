@@ -4,6 +4,7 @@
   "package": "aartcraft.aartbars.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "BlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -28,6 +28,7 @@ public class AartBarsClient implements ClientModInitializer {
                 }
             });
 
+            LOGGER.info("Registering block breaking mixin");
             LOGGER.info("Aartcraft AartBars client initialized successfully " + AartBars.MOD_ID);
         } catch (Exception e) {
             LOGGER.error("Failed to initialize Aartcraft ArrowHUD client", e);

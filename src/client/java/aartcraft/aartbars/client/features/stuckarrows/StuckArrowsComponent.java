@@ -2,6 +2,7 @@ package aartcraft.aartbars.client.features.stuckarrows;
 
 import aartcraft.aartbars.client.components.BaseHUDComponent;
 import aartcraft.aartbars.helpers.TextureHelper;
+import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
@@ -39,7 +40,8 @@ public class StuckArrowsComponent extends BaseHUDComponent {
 
     @Override
     public void handleEvent(HUDOverlayEvent event) {
-        if (event instanceof StuckArrowsEvent stuckArrowsEvent) {
+        if (event instanceof StuckArrowsEvent) {
+            StuckArrowsEvent stuckArrowsEvent = (StuckArrowsEvent) event;
             if (!stuckArrowsEvent.isCanceled && stuckArrowsEvent.stuckarrows > 0) {
                 drawStuckArrowsOverlay(stuckArrowsEvent, MinecraftClient.getInstance(), 1f);
             }

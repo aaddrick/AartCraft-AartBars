@@ -25,7 +25,7 @@ public class AartBarsClient implements ClientModInitializer {
             LOGGER.info("ARROW_SPRITE: " + TextureHelper.ARROW_SPRITE);
 
             // Register event handlers
-            StuckArrowsEvent.EVENT.register(event -> {
+            StuckArrowsEvent.EVENT.register((StuckArrowsEvent event) -> {
                 if (!event.isCanceled) {
                     HUDOverlayHandler.INSTANCE.onStuckArrowsRender(event);
                 }

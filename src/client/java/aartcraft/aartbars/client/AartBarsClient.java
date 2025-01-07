@@ -1,11 +1,9 @@
 package aartcraft.aartbars.client;
 
 import aartcraft.aartbars.AartBars;
-import aartcraft.aartbars.api.event.HUDOverlayEvent;
-import aartcraft.aartbars.helpers.TextureHelper;
+import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +20,6 @@ public class AartBarsClient implements ClientModInitializer {
 
             // Initialize the HUD overlay handler
             HUDOverlayHandler.init();
-            LOGGER.info("ARROW_SPRITE: " + TextureHelper.ARROW_SPRITE);
 
             // Register event handlers
             StuckArrowsEvent.EVENT.register((StuckArrowsEvent event) -> {

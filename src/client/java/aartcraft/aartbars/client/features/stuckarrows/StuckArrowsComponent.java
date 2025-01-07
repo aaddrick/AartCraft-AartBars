@@ -47,7 +47,7 @@ public class StuckArrowsComponent extends BaseHUDComponent {
         }
     }
 
-    private void drawStuckArrowsOverlay(StuckArrowsEvent event, MinecraftClient mc, float alpha) {
+    public void drawStuckArrowsOverlay(StuckArrowsEvent event, MinecraftClient mc, float alpha) {
         drawStuckArrowsOverlay(event.context, event.stuckarrows, mc, event.x, event.y, alpha);
     }
 

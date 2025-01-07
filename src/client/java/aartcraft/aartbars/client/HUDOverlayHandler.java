@@ -46,14 +46,6 @@ public class HUDOverlayHandler implements AartcraftApi {
         }
     }
 
-    public void drawStuckArrowsOverlay(StuckArrowsEvent event, MinecraftClient mc, float alpha) {
-        for (HUDComponent component : components) {
-            if (component instanceof StuckArrowsComponent) {
-                ((StuckArrowsComponent) component).drawStuckArrowsOverlay(event, mc, alpha);
-            }
-        }
-    }
-
     public void onRender(DrawContext context) {
         int screenWidth = MinecraftClient.getInstance().getWindow().getScaledWidth();
         int screenHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();

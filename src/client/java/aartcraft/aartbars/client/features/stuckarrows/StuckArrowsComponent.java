@@ -16,12 +16,20 @@ public class StuckArrowsComponent extends BaseHUDComponent {
     private static final int SHAKE_DURATION = 20;
     private final Random random = new Random();
 
-    public StuckArrowsComponent(int x, int y) {
-        super(x, y);
+    public StuckArrowsComponent() {
+        super(0, 0); // Initialize with 0,0 - we'll calculate real position in updatePosition()
+        updatePosition();
+    }
+
+    private void updatePosition() {
+        MinecraftClient mc = MinecraftClient.getInstance();
+        this.x = mc.getWindow().getScaledWidth() / 2 + 91;
+        this.y = mc.getWindow().getScaledHeight() - 39;
     }
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
+        updatePosition();
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerEntity player = mc.player;
         if (player == null) return;

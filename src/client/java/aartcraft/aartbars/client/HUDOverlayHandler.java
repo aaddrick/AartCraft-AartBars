@@ -20,10 +20,7 @@ public class HUDOverlayHandler implements AartcraftApi {
         INSTANCE = new HUDOverlayHandler();
 
         // Register the stuck arrows component
-        INSTANCE.registerComponent(new StuckArrowsComponent(
-                MinecraftClient.getInstance().getWindow().getScaledWidth() / 2 + 91,
-                MinecraftClient.getInstance().getWindow().getScaledHeight() - 39
-        ));
+        INSTANCE.registerComponent(new StuckArrowsComponent());
 
         // Register the stuck arrows event
         StuckArrowsEvent.EVENT.register(INSTANCE::onStuckArrowsRender);

@@ -17,19 +17,14 @@ public class StuckArrowsComponent extends BaseHUDComponent {
     private final Random random = new Random();
 
     public StuckArrowsComponent() {
-        super(0, 0); // Initialize with 0,0 - we'll calculate real position in updatePosition()
-        updatePosition();
-    }
-
-    private void updatePosition() {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        this.x = mc.getWindow().getScaledWidth() / 2 + 91;
-        this.y = mc.getWindow().getScaledHeight() - 39;
+        super(0, 0); // Initialize with 0,0
     }
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
-        updatePosition();
+        // Update position using provided screen dimensions
+        this.x = screenWidth / 2 + 91;
+        this.y = screenHeight - 39;
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerEntity player = mc.player;
         if (player == null) return;

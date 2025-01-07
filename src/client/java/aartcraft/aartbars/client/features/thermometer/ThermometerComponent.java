@@ -17,8 +17,8 @@ public class ThermometerComponent extends BaseHUDComponent {
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
-        this.x = screenWidth / 2;
-        this.y = screenHeight / 2 - 90;
+        this.x = screenWidth / 2 + 94;
+        this.y = screenHeight - 58;
         
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerEntity player = mc.player;

@@ -16,8 +16,8 @@ public class ThermometerComponent extends BaseHUDComponent {
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
-        this.x = screenWidth / 2 - 91;
-        this.y = screenHeight - 39;
+        this.x = screenWidth / 2;
+        this.y = screenHeight / 2;
         
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerEntity player = mc.player;
@@ -41,15 +41,15 @@ public class ThermometerComponent extends BaseHUDComponent {
         enableAlpha(alpha);
         
         // Map temperature to sprite index (0-7)
-        int spriteIndex = Math.min(7, Math.max(0, (int)(temperature * 7)));
+        int spriteIndex = Math.min(6, Math.max(0, (int)(temperature * 7)));
         
         context.drawTexture(
             RenderLayer::getGuiTextured,
             TextureHelper.THERMOMETER_SPRITE,
             x, y,
             spriteIndex * 15f, 0f, // Select sprite segment
-            15, 15, // Sprite size
-            120, 15 // Texture dimensions
+            15, 33, // Sprite size
+            105, 33 // Texture dimensions
         );
         disableAlpha();
     }

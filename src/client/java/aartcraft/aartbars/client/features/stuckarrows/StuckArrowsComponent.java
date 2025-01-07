@@ -40,8 +40,7 @@ public class StuckArrowsComponent extends BaseHUDComponent {
 
     @Override
     public void handleEvent(HUDOverlayEvent event) {
-        if (event instanceof StuckArrowsEvent) {
-            StuckArrowsEvent stuckArrowsEvent = (StuckArrowsEvent) event;
+        if (event instanceof StuckArrowsEvent stuckArrowsEvent) {
             if (!stuckArrowsEvent.isCanceled && stuckArrowsEvent.stuckarrows > 0) {
                 drawStuckArrowsOverlay(stuckArrowsEvent, MinecraftClient.getInstance(), 1f);
             }

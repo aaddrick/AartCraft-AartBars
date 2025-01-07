@@ -3,6 +3,8 @@ package aartcraft.aartbars.client;
 import aartcraft.aartbars.api.AartcraftApi;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsComponent;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;
+import aartcraft.aartbars.client.features.thermometer.ThermometerComponent;
+import aartcraft.aartbars.client.features.thermometer.ThermometerEvent;
 import aartcraft.aartbars.client.components.HUDComponent;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import aartcraft.aartbars.api.handler.EventHandler;
@@ -21,9 +23,12 @@ public class HUDOverlayHandler implements AartcraftApi {
 
         // Register the stuck arrows component
         INSTANCE.registerComponent(new StuckArrowsComponent());
+        // Register the thermometer component
+        INSTANCE.registerComponent(new ThermometerComponent());
 
-        // Register the stuck arrows event
+        // Register events
         StuckArrowsEvent.EVENT.register(INSTANCE::onStuckArrowsRender);
+        ThermometerEvent.EVENT.register(INSTANCE::onThermometerRender);
     }
 
     @Override
@@ -40,6 +45,8 @@ public class HUDOverlayHandler implements AartcraftApi {
     public <T extends HUDOverlayEvent> void registerEvent(Class<T> eventClass, EventHandler<T> handler) {
         if (eventClass == StuckArrowsEvent.class) {
             StuckArrowsEvent.EVENT.register((EventHandler<StuckArrowsEvent>) handler);
+        } else if (eventClass == ThermometerEvent.class) {
+            ThermometerEvent.EVENT.register((EventHandler<ThermometerEvent>) handler);
         }
     }
 
@@ -53,6 +60,12 @@ public class HUDOverlayHandler implements AartcraftApi {
     }
 
     public void onStuckArrowsRender(StuckArrowsEvent event) {
+        for (HUDComponent component : components) {
+            component.handleEvent(event);
+        }
+    }
+
+    public void onThermometerRender(ThermometerEvent event) {
         for (HUDComponent component : components) {
             component.handleEvent(event);
         }

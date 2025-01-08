@@ -58,8 +58,12 @@ public class ConfigScreen extends Screen {
         this.addDrawableChild(ButtonWidget.builder(
             Text.translatable("text.aartbars.config.done"),
             button -> {
-                config.save();
-                this.client.setScreen(parent);
+                if (config != null) {
+                    config.save();
+                }
+                if (this.client != null) {
+                    this.client.setScreen(parent);
+                }
             })
             .dimensions(this.width / 2 - 100, this.height / 4 + 120, 200, 20)
             .build());
@@ -67,7 +71,7 @@ public class ConfigScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        if (this.client == null) return;
+        if (this.client == null || this.textRenderer == null) return;
         this.renderBackground(context, mouseX, mouseY, delta);
         context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 40, 0xFFFFFF);
         super.render(context, mouseX, mouseY, delta);

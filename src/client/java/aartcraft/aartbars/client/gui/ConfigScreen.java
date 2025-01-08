@@ -62,7 +62,9 @@ public class ConfigScreen extends Screen {
             Text.translatable("text.aartbars.config.done"),
             button -> {
                 config.save();
-                this.client.setScreen(parent);
+                if (this.client != null) {
+                    this.client.setScreen(parent);
+                }
             })
             .dimensions(this.width / 2 - 100, this.height / 4 + 120, 200, 20)
             .build());

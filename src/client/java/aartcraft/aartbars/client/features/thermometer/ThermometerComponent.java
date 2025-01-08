@@ -1,5 +1,6 @@
 package aartcraft.aartbars.client.features.thermometer;
 
+import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.client.components.BaseHUDComponent;
 import aartcraft.aartbars.helpers.TextureHelper;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
@@ -16,6 +17,7 @@ public class ThermometerComponent extends BaseHUDComponent {
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
+        if (!AartBarsClient.config.showThermometer) return;
         this.x = screenWidth / 2 + 94;
         this.y = screenHeight - 58;
         

@@ -1,5 +1,6 @@
 package aartcraft.aartbars.client.features.stuckarrows;
 
+import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.client.components.BaseHUDComponent;
 import aartcraft.aartbars.helpers.TextureHelper;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
@@ -22,6 +23,7 @@ public class StuckArrowsComponent extends BaseHUDComponent {
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
+        if (!AartBarsClient.config.showStuckArrows) return;
         // Update position using provided screen dimensions
         this.x = screenWidth / 2 + 91;
         this.y = screenHeight - 39;

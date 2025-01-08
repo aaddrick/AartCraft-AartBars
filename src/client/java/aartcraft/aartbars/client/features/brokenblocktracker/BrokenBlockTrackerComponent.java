@@ -1,5 +1,6 @@
 package aartcraft.aartbars.client.features.brokenblocktracker;
 
+import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.client.components.BaseHUDComponent;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import net.minecraft.client.MinecraftClient;
@@ -15,6 +16,7 @@ public class BrokenBlockTrackerComponent extends BaseHUDComponent {
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
+        if (!AartBarsClient.config.showBrokenBlockTracker) return;
         this.x = screenWidth / 2 + 93; // Left side position
         this.y = screenHeight - 20; // Bottom position
         

@@ -18,6 +18,7 @@ public class ModConfig {
     public boolean showStuckArrows = true;
     public boolean showSpeedometer = true;
     public boolean showThermometer = true;
+    public boolean showBrokenBlockTracker = true;
 
     public static ModConfig load() {
         if (CONFIG_FILE.exists()) {

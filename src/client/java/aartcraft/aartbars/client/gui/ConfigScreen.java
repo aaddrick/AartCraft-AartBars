@@ -57,6 +57,18 @@ public class ConfigScreen extends Screen {
             .dimensions(this.width / 2 - 100, this.height / 4 + 72, 200, 20)
             .build());
 
+        // Broken Block Tracker Toggle
+        this.addDrawableChild(ButtonWidget.builder(
+            Text.translatable("text.aartbars.config.broken_block_tracker", 
+                config.showBrokenBlockTracker ? "ON" : "OFF"),
+            button -> {
+                config.showBrokenBlockTracker = !config.showBrokenBlockTracker;
+                button.setMessage(Text.translatable("text.aartbars.config.broken_block_tracker", 
+                    config.showBrokenBlockTracker ? "ON" : "OFF"));
+            })
+            .dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20)
+            .build());
+
         // Done Button
         this.addDrawableChild(ButtonWidget.builder(
             Text.translatable("text.aartbars.config.done"),

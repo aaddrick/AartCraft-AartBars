@@ -13,6 +13,9 @@ import org.joml.Quaternionf;
 public class SpeedometerComponent extends BaseHUDComponent {
     private final Vec3d[] positionHistory = new Vec3d[3];
     private int historyIndex = 0;
+    private float currentSpeed = 0f;
+    private float targetSpeed = 0f;
+    private static final float LERP_FACTOR = 0.2f; // Adjust this for smoother/faster response
     
     public SpeedometerComponent() {
         super(0, 0);
@@ -21,24 +24,32 @@ public class SpeedometerComponent extends BaseHUDComponent {
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
-        this.x = screenWidth / 2 - 100; // Left side position
-        this.y = screenHeight - 50; // Bottom position
+        this.x = screenWidth / 2 - 100;
+        this.y = screenHeight - 50;
         
         MinecraftClient mc = MinecraftClient.getInstance();
         if (mc.player == null || mc.world == null) return;
 
-        // Calculate speed
-        float speed = calculatePlayerSpeed(mc);
-        float rotation = calculateNeedleRotation(speed);
+        // Calculate target speed
+        targetSpeed = calculatePlayerSpeed(mc);
         
+        // Lerp towards target speed
+        currentSpeed = lerp(currentSpeed, targetSpeed, LERP_FACTOR);
+        
+        float rotation = calculateNeedleRotation(currentSpeed);
         drawSpeedometer(context, rotation, x, y, alpha);
+    }
+
+    private float lerp(float start, float end, float factor) {
+        return start + factor * (end - start);
     }
 
     @Override
     public void handleEvent(HUDOverlayEvent event) {
         if (event instanceof SpeedometerEvent speedEvent) {
-            drawSpeedometer(speedEvent.context, speedEvent.rotation, 
-                          speedEvent.x, speedEvent.y, 1f);
+            drawSpeedometer(speedEvent.context, 
+                calculateNeedleRotation(currentSpeed), 
+                speedEvent.x, speedEvent.y, 1f);
         }
     }
 

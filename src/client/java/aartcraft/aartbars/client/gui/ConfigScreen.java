@@ -1,6 +1,6 @@
 package aartcraft.aartbars.client.gui;
 
-import aartcraft.aartbars.AartBars;
+import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.ModConfig;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -11,10 +11,10 @@ public class ConfigScreen extends Screen {
     private final Screen parent;
     private final ModConfig config;
 
-    protected ConfigScreen(Screen parent) {
+    public ConfigScreen(Screen parent) {
         super(Text.translatable("text.aartbars.config.title"));
         this.parent = parent != null ? parent : this.client.currentScreen;
-        this.config = AartBars.config;
+        this.config = AartBarsClient.config;
     }
 
     @Override

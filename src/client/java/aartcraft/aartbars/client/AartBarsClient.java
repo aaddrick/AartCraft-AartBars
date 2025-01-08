@@ -2,10 +2,12 @@ package aartcraft.aartbars.client;
 
 import aartcraft.aartbars.AartBars;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;
+import aartcraft.aartbars.client.gui.ConfigScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
@@ -57,10 +59,6 @@ public class AartBarsClient implements ClientModInitializer {
             if (client.player != null && client.currentScreen == null) {
                 client.setScreen(new ConfigScreen(client.currentScreen));
             }
-        }
-        } catch (Exception e) {
-            LOGGER.error("Failed to initialize Aartcraft ArrowHUD client", e);
-            throw e;
         }
     }
 }

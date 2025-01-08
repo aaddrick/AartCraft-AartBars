@@ -7,6 +7,8 @@ import aartcraft.aartbars.client.features.thermometer.ThermometerComponent;
 import aartcraft.aartbars.client.features.thermometer.ThermometerEvent;
 import aartcraft.aartbars.client.features.brokenblocktracker.BrokenBlockTrackerComponent;
 import aartcraft.aartbars.client.features.brokenblocktracker.BrokenBlockTrackerEvent;
+import aartcraft.aartbars.client.features.speedometer.SpeedometerComponent;
+import aartcraft.aartbars.client.features.speedometer.SpeedometerEvent;
 import aartcraft.aartbars.client.components.HUDComponent;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import aartcraft.aartbars.api.handler.EventHandler;
@@ -29,11 +31,15 @@ public class HUDOverlayHandler implements AartcraftApi {
         INSTANCE.registerComponent(new ThermometerComponent());
         // Register the broken block tracker component
         INSTANCE.registerComponent(new BrokenBlockTrackerComponent());
+        // Register the speedometer component
+        INSTANCE.registerComponent(new SpeedometerComponent());
 
         // Register events
         StuckArrowsEvent.EVENT.register(INSTANCE::onStuckArrowsRender);
         ThermometerEvent.EVENT.register(INSTANCE::onThermometerRender);
         BrokenBlockTrackerEvent.EVENT.register(INSTANCE::onBrokenBlockTrackerRender);
+        // Register speedometer event
+        SpeedometerEvent.EVENT.register(INSTANCE::onSpeedometerRender);
     }
 
     @Override
@@ -54,6 +60,8 @@ public class HUDOverlayHandler implements AartcraftApi {
             ThermometerEvent.EVENT.register((EventHandler<ThermometerEvent>) handler);
         } else if (eventClass == BrokenBlockTrackerEvent.class) {
             BrokenBlockTrackerEvent.EVENT.register((EventHandler<BrokenBlockTrackerEvent>) handler);
+        } else if (eventClass == SpeedometerEvent.class) {
+            SpeedometerEvent.EVENT.register((EventHandler<SpeedometerEvent>) handler);
         }
     }
 
@@ -79,6 +87,12 @@ public class HUDOverlayHandler implements AartcraftApi {
     }
 
     public void onBrokenBlockTrackerRender(BrokenBlockTrackerEvent event) {
+        for (HUDComponent component : components) {
+            component.handleEvent(event);
+        }
+    }
+
+    public void onSpeedometerRender(SpeedometerEvent event) {
         for (HUDComponent component : components) {
             component.handleEvent(event);
         }

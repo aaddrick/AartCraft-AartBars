@@ -1,0 +1,9 @@
+{
+  "key.aartbars.config": "Open AartBars Settings",
+  "category.aartbars.main": "AartBars",
+  "text.aartbars.config.title": "AartBars Settings",
+  "text.aartbars.config.stuck_arrows": "Stuck Arrows: %s",
+  "text.aartbars.config.speedometer": "Speedometer: %s",
+  "text.aartbars.config.thermometer": "Thermometer: %s",
+  "text.aartbars.config.done": "Done"
+}

@@ -24,6 +24,8 @@ public class SpeedometerComponent extends BaseHUDComponent {
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
+        if (!AartBars.config.showSpeedometer) return;
+        
         this.x = screenWidth / 2 - 100;
         this.y = screenHeight - 50;
         

@@ -6,17 +6,18 @@ import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.util.math.Vec3d;
+import java.util.Arrays;
 import org.joml.Quaternionf;
 
 public class SpeedometerComponent extends BaseHUDComponent {
     private float lastSpeed = 0;
-    private long lastUpdateTime = 0;
+    private final Vec3d[] positionHistory = new Vec3d[3];
+    private int historyIndex = 0;
     
     public SpeedometerComponent() {
         super(0, 0);
+        Arrays.fill(positionHistory, Vec3d.ZERO);
     }
 
     @Override
@@ -45,26 +46,33 @@ public class SpeedometerComponent extends BaseHUDComponent {
     private float calculatePlayerSpeed(MinecraftClient mc) {
         if (mc.player == null) return 0f;
         
-        // Get base movement speed from attributes
-        float baseSpeed = mc.player.getMovementSpeed();
+        // Get current position
+        Vec3d currentPos = mc.player.getPos();
         
-        // Get actual movement speed based on player state
-        float actualSpeed = baseSpeed;
+        // Store current position in history
+        positionHistory[historyIndex] = currentPos;
+        historyIndex = (historyIndex + 1) % positionHistory.length;
         
-        // Check if player is sprinting
-        if (mc.player.isSprinting()) {
-            actualSpeed *= 1.3f; // Sprinting multiplier
+        // Calculate average speed over last 3 ticks
+        float totalDistance = 0f;
+        int validPositions = 0;
+        
+        for (int i = 0; i < positionHistory.length; i++) {
+            Vec3d prevPos = positionHistory[i];
+            if (prevPos != null) {
+                totalDistance += currentPos.distanceTo(prevPos);
+                validPositions++;
+            }
         }
         
-        // Check if player is sneaking
-        if (mc.player.isSneaking()) {
-            actualSpeed *= 0.3f; // Sneaking multiplier
-        }
+        // If we don't have enough history yet, return 0
+        if (validPositions < 2) return 0f;
         
-        // Convert to blocks per second (1 block = 1 meter)
-        // Base walking speed is ~4.317 m/s (4.317 blocks per second)
-        // Sprinting speed is ~5.612 m/s
-        return actualSpeed * 20f; // Multiply by 20 to convert from blocks/tick to blocks/second
+        // Calculate average speed in blocks/tick
+        float averageSpeed = totalDistance / validPositions;
+        
+        // Convert to blocks per second (20 ticks per second)
+        return averageSpeed * 20f;
     }
 
     private float calculateNeedleRotation(float speed) {

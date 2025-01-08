@@ -11,7 +11,6 @@ import java.util.Arrays;
 import org.joml.Quaternionf;
 
 public class SpeedometerComponent extends BaseHUDComponent {
-    private float lastSpeed = 0;
     private final Vec3d[] positionHistory = new Vec3d[3];
     private int historyIndex = 0;
     
@@ -56,11 +55,10 @@ public class SpeedometerComponent extends BaseHUDComponent {
         // Calculate average speed over last 3 ticks
         float totalDistance = 0f;
         int validPositions = 0;
-        
-        for (int i = 0; i < positionHistory.length; i++) {
-            Vec3d prevPos = positionHistory[i];
+
+        for (Vec3d prevPos : positionHistory) {
             if (prevPos != null) {
-                totalDistance += currentPos.distanceTo(prevPos);
+                totalDistance += (float) currentPos.distanceTo(prevPos);
                 validPositions++;
             }
         }

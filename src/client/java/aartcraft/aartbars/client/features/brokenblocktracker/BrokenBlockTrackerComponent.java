@@ -15,8 +15,8 @@ public class BrokenBlockTrackerComponent extends BaseHUDComponent {
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
-        this.x = screenWidth / 2 - 100; // Left side position
-        this.y = screenHeight - 30; // Bottom position
+        this.x = screenWidth / 2 + 93; // Left side position
+        this.y = screenHeight - 20; // Bottom position
         
         MinecraftClient mc = MinecraftClient.getInstance();
         if (mc.player == null) return;

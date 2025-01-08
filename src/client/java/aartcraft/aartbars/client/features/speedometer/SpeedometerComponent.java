@@ -88,7 +88,7 @@ public class SpeedometerComponent extends BaseHUDComponent {
         // Map speed to rotation angle (-90° to 90°)
         // Max speed is ~5.612 blocks/second when sprinting
         float maxSpeed = 6f; // Slightly above max sprinting speed
-        return Math.min(90, Math.max(-90, (speed / maxSpeed) * 90));
+        return (speed / maxSpeed) * 180f - 90f;
     }
 
     private void drawSpeedometer(DrawContext context, float rotation, int x, int y, float alpha) {

@@ -6,6 +6,8 @@ import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Quaternionf;
 
@@ -43,31 +45,32 @@ public class SpeedometerComponent extends BaseHUDComponent {
     private float calculatePlayerSpeed(MinecraftClient mc) {
         if (mc.player == null) return 0f;
         
-        Vec3d currentPos = mc.player.getPos();
-        if (currentPos == null) return 0f;
+        // Get base movement speed from attributes
+        float baseSpeed = mc.player.getMovementSpeed();
         
-        long currentTime = System.currentTimeMillis();
+        // Get actual movement speed based on player state
+        float actualSpeed = baseSpeed;
         
-        if (lastUpdateTime == 0) {
-            lastUpdateTime = currentTime;
-            return 0;
+        // Check if player is sprinting
+        if (mc.player.isSprinting()) {
+            actualSpeed *= 1.3f; // Sprinting multiplier
         }
         
-        float timeDelta = (currentTime - lastUpdateTime) / 1000f;
-        if (timeDelta < 0.1f) return lastSpeed;
+        // Check if player is sneaking
+        if (mc.player.isSneaking()) {
+            actualSpeed *= 0.3f; // Sneaking multiplier
+        }
         
-        float distance = (float) mc.player.getPos().distanceTo(currentPos);
-        float speed = distance / timeDelta;
-        
-        lastSpeed = speed;
-        lastUpdateTime = currentTime;
-        
-        return speed;
+        // Convert to blocks per second (1 block = 1 meter)
+        // Base walking speed is ~4.317 m/s (4.317 blocks per second)
+        // Sprinting speed is ~5.612 m/s
+        return actualSpeed * 20f; // Multiply by 20 to convert from blocks/tick to blocks/second
     }
 
     private float calculateNeedleRotation(float speed) {
         // Map speed to rotation angle (-90° to 90°)
-        float maxSpeed = 10f; // 10 blocks per second
+        // Max speed is ~5.612 blocks/second when sprinting
+        float maxSpeed = 6f; // Slightly above max sprinting speed
         return Math.min(90, Math.max(-90, (speed / maxSpeed) * 90));
     }
 

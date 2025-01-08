@@ -1,6 +1,6 @@
 package aartcraft.aartbars.client.features.speedometer;
 
-import aartcraft.aartbars.AartBars;
+import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.client.components.BaseHUDComponent;
 import aartcraft.aartbars.helpers.TextureHelper;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
@@ -24,7 +24,7 @@ public class SpeedometerComponent extends BaseHUDComponent {
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
-        if (!AartBars.config.showSpeedometer) return;
+        if (!AartBarsClient.config.showSpeedometer) return;
         
         this.x = screenWidth / 2 - 100;
         this.y = screenHeight - 50;
@@ -81,7 +81,6 @@ public class SpeedometerComponent extends BaseHUDComponent {
         
         // Calculate average speed in blocks/tick
         float averageSpeed = totalDistance / validPositions;
-        AartBars.LOGGER.info("Average Speed: {}", averageSpeed);
         return averageSpeed * 20f;
     }
 

@@ -1,6 +1,5 @@
 package aartcraft.aartbars.mixin.client;
 
-import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.client.features.brokenblocktracker.BrokenBlockTrackerEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -9,12 +8,14 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Block.class)
 public class BlockMixin {
+    @Unique
     private static int blocksBroken = 0;
 
     @Inject(method = "onBroken", at = @At("HEAD"))

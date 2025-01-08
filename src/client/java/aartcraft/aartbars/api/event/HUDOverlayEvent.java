@@ -1,7 +1,5 @@
 package aartcraft.aartbars.api.event;
 
-import aartcraft.aartbars.api.handler.EventHandler;
-import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.gui.DrawContext;
 
 public class HUDOverlayEvent {

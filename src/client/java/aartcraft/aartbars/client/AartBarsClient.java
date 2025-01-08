@@ -1,5 +1,6 @@
 package aartcraft.aartbars.client;
 
+import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;
 import aartcraft.aartbars.client.gui.ConfigScreen;
 import net.fabricmc.api.ClientModInitializer;

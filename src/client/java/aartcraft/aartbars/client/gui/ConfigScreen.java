@@ -1,6 +1,5 @@
 package aartcraft.aartbars.client.gui;
 
-import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.ModConfig;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;

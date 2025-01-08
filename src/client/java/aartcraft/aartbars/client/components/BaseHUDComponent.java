@@ -1,7 +1,6 @@
 package aartcraft.aartbars.client.components;
 
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
-import net.minecraft.client.gui.DrawContext;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 

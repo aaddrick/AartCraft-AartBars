@@ -1,6 +1,5 @@
 package aartcraft.aartbars.client.features.thermometer;
 
-import aartcraft.aartbars.AartBars;
 import aartcraft.aartbars.client.components.BaseHUDComponent;
 import aartcraft.aartbars.helpers.TextureHelper;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;

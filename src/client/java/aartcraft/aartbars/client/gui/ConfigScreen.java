@@ -1,6 +1,7 @@
 package aartcraft.aartbars.client.gui;
 
 import aartcraft.aartbars.ModConfig;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -12,6 +13,8 @@ public class ConfigScreen extends Screen {
 
     public ConfigScreen(Screen parent, ModConfig config) {
         super(Text.translatable("text.aartbars.config.title"));
+        // Ensure we have a valid client reference
+        this.client = MinecraftClient.getInstance();
         this.parent = parent != null ? parent : this.client.currentScreen;
         this.config = config;
     }
@@ -58,12 +61,8 @@ public class ConfigScreen extends Screen {
         this.addDrawableChild(ButtonWidget.builder(
             Text.translatable("text.aartbars.config.done"),
             button -> {
-                if (config != null) {
-                    config.save();
-                }
-                if (this.client != null) {
-                    this.client.setScreen(parent);
-                }
+                config.save();
+                this.client.setScreen(parent);
             })
             .dimensions(this.width / 2 - 100, this.height / 4 + 120, 200, 20)
             .build());

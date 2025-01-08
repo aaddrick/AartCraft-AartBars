@@ -80,13 +80,13 @@ public class SpeedometerComponent extends BaseHUDComponent {
         // Calculate average speed in blocks/tick
         float averageSpeed = totalDistance / validPositions;
         AartBars.LOGGER.info("Average Speed: {}", averageSpeed);
-        return averageSpeed;
+        return averageSpeed * 20f;
     }
 
     private float calculateNeedleRotation(float speed) {
         // Map speed to rotation angle (0° to 180°)
         // Max speed is ~0.28 blocks/tick when sprinting
-        float maxSpeed = 2f; // Slightly above max sprinting speed
+        float maxSpeed = 40f; // Slightly above max sprinting speed
         // Clamp the speed to prevent over-rotation
         speed = Math.min(speed, maxSpeed);
         return (speed / maxSpeed) * 270f;

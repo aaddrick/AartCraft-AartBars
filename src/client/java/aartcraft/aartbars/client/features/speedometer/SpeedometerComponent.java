@@ -29,19 +29,23 @@ public class SpeedometerComponent extends BaseHUDComponent {
         float speed = calculatePlayerSpeed(mc);
         float rotation = calculateNeedleRotation(speed);
         
-        drawSpeedometer(context, speed, rotation, x, y, alpha);
+        drawSpeedometer(context, rotation, x, y, alpha);
     }
 
     @Override
     public void handleEvent(HUDOverlayEvent event) {
         if (event instanceof SpeedometerEvent speedEvent) {
-            drawSpeedometer(speedEvent.context, speedEvent.speed, 
-                          speedEvent.rotation, speedEvent.x, speedEvent.y, 1f);
+            drawSpeedometer(speedEvent.context, speedEvent.rotation, 
+                          speedEvent.x, speedEvent.y, 1f);
         }
     }
 
     private float calculatePlayerSpeed(MinecraftClient mc) {
+        if (mc.player == null) return 0f;
+        
         Vec3d currentPos = mc.player.getPos();
+        if (currentPos == null) return 0f;
+        
         long currentTime = System.currentTimeMillis();
         
         if (lastUpdateTime == 0) {
@@ -67,7 +71,7 @@ public class SpeedometerComponent extends BaseHUDComponent {
         return Math.min(90, Math.max(-90, (speed / maxSpeed) * 90));
     }
 
-    private void drawSpeedometer(DrawContext context, float speed, float rotation, int x, int y, float alpha) {
+    private void drawSpeedometer(DrawContext context, float rotation, int x, int y, float alpha) {
         enableAlpha(alpha);
         
         // Draw base

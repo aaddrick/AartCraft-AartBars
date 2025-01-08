@@ -16,11 +16,15 @@ import org.slf4j.LoggerFactory;
 public class AartBarsClient implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("AartcraftArrowHUD");
     private static KeyBinding configKeyBinding;
+    public static ModConfig config;
 
     @Override
     public void onInitializeClient() {
         try {
             LOGGER.info("Initializing Aartcraft ArrowHUD client");
+
+            // Load config
+            config = ModConfig.load();
 
             // Register HUD render callback
             HudRenderCallback.EVENT.register((drawContext, tickDelta) -> HUDOverlayHandler.INSTANCE.onRender(drawContext));
@@ -46,7 +50,7 @@ public class AartBarsClient implements ClientModInitializer {
             // Register client tick event for key binding
             ClientTickEvents.END_CLIENT_TICK.register(this::handleClientTick);
 
-            LOGGER.info("Aartcraft AartBars client initialized successfully " + AartBars.MOD_ID);
+            LOGGER.info("Aartcraft AartBars client initialized successfully");
         } catch (Exception e) {
             LOGGER.error("Failed to initialize Aartcraft ArrowHUD client", e);
             throw e;
@@ -56,7 +60,7 @@ public class AartBarsClient implements ClientModInitializer {
     private void handleClientTick(MinecraftClient client) {
         while (configKeyBinding.wasPressed()) {
             if (client.player != null && client.currentScreen == null) {
-                client.setScreen(new ConfigScreen(client.currentScreen, AartBars.config));
+                client.setScreen(new ConfigScreen(client.currentScreen, config));
             }
         }
     }

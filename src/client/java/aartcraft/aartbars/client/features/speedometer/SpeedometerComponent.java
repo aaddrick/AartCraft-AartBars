@@ -86,10 +86,10 @@ public class SpeedometerComponent extends BaseHUDComponent {
     private float calculateNeedleRotation(float speed) {
         // Map speed to rotation angle (0° to 180°)
         // Max speed is ~0.28 blocks/tick when sprinting
-        float maxSpeed = 0.3f; // Slightly above max sprinting speed
+        float maxSpeed = 2f; // Slightly above max sprinting speed
         // Clamp the speed to prevent over-rotation
         speed = Math.min(speed, maxSpeed);
-        return (speed / maxSpeed) * 180f;
+        return (speed / maxSpeed) * 270f;
     }
 
     private void drawSpeedometer(DrawContext context, float rotation, int x, int y, float alpha) {

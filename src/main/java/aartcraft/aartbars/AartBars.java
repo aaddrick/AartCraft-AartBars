@@ -37,8 +37,8 @@ public class AartBars implements ModInitializer, ClientModInitializer {
         // Register client tick event
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (configKeyBinding.wasPressed()) {
-                if (client.player != null) {
-                    client.setScreen(new ConfigScreen(null));
+                if (client.player != null && client.currentScreen == null) {
+                    client.setScreen(new ConfigScreen(client.currentScreen));
                 }
             }
         });

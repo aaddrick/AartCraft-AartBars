@@ -13,7 +13,7 @@ public class ConfigScreen extends Screen {
 
     protected ConfigScreen(Screen parent) {
         super(Text.translatable("text.aartbars.config.title"));
-        this.parent = parent;
+        this.parent = parent != null ? parent : this.client.currentScreen;
         this.config = AartBars.config;
     }
 
@@ -68,6 +68,7 @@ public class ConfigScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        if (this.client == null) return;
         this.renderBackground(context);
         context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 40, 0xFFFFFF);
         super.render(context, mouseX, mouseY, delta);

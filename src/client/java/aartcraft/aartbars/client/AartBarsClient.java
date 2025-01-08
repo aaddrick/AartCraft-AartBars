@@ -57,7 +57,7 @@ public class AartBarsClient implements ClientModInitializer {
     private void handleClientTick(MinecraftClient client) {
         while (configKeyBinding.wasPressed()) {
             if (client.player != null && client.currentScreen == null) {
-                client.setScreen(new ConfigScreen(client.currentScreen));
+                client.setScreen(new ConfigScreen(client.currentScreen, AartBars.config));
             }
         }
     }

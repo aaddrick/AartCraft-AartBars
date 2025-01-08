@@ -11,10 +11,10 @@ public class ConfigScreen extends Screen {
     private final Screen parent;
     private final ModConfig config;
 
-    public ConfigScreen(Screen parent) {
+    public ConfigScreen(Screen parent, ModConfig config) {
         super(Text.translatable("text.aartbars.config.title"));
         this.parent = parent != null ? parent : this.client.currentScreen;
-        this.config = AartBarsClient.config;
+        this.config = config;
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.math.Vec3d;
+import org.joml.Quaternionf;
 
 public class SpeedometerComponent extends BaseHUDComponent {
     private float lastSpeed = 0;
@@ -82,7 +83,9 @@ public class SpeedometerComponent extends BaseHUDComponent {
         // Draw needle with rotation
         context.getMatrices().push();
         context.getMatrices().translate(x + 16, y + 16, 0);
-        context.getMatrices().rotate(rotation * (float)Math.PI / 180f, 0, 0, 1);
+        // Create quaternion for rotation around Z axis
+        Quaternionf rotationQuat = new Quaternionf().rotateZ(rotation * (float)Math.PI / 180f);
+        context.getMatrices().multiply(rotationQuat);
         context.drawTexture(
             RenderLayer::getGuiTextured,
             TextureHelper.SPEEDOMETER_NEEDLE,

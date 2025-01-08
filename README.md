@@ -1,6 +1,6 @@
 # AartBars - HUD Components
 
-A lightweight Minecraft mod that adds various HUD components including stuck arrows and speedometer.
+A lightweight Minecraft mod that adds various HUD components requested by my son Aart.
 
 ## Features
 
@@ -76,17 +76,11 @@ The mod works out-of-the-box with default settings. No configuration required!
 
 ## Credits
 
-- **Developer**: AartCraft Team
-- **Contributors**: [Your Name Here]
-- **Special Thanks**: Minecraft Modding Community
+- **Technical Director**: Aart
+- **Developer**: aaddrick
+- **Special Thanks**: [Squeek](https://github.com/squeek502) from Appleskin fame, from whom I shamelessly stole the bones of this mode from. 
 
 ## License
 
 This mod is released under the [Unlicense](LICENSE.txt), meaning you're free to use, modify, and distribute it however you like!
 
-```
-
-## Screenshots
-
-![Stuck Arrows HUD Example](screenshots/example.png) 
-*Note: Add your screenshot to the screenshots folder*

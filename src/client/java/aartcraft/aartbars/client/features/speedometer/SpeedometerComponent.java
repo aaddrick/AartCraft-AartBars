@@ -11,10 +11,9 @@ import java.util.Arrays;
 import org.joml.Quaternionf;
 
 public class SpeedometerComponent extends BaseHUDComponent {
-    private final Vec3d[] positionHistory = new Vec3d[3];
+    private final Vec3d[] positionHistory = new Vec3d[10];
     private int historyIndex = 0;
     private float currentSpeed = 0f;
-    private float targetSpeed = 0f;
     private static final float LERP_FACTOR = 0.2f; // Adjust this for smoother/faster response
     
     public SpeedometerComponent() {
@@ -31,17 +30,17 @@ public class SpeedometerComponent extends BaseHUDComponent {
         if (mc.player == null || mc.world == null) return;
 
         // Calculate target speed
-        targetSpeed = calculatePlayerSpeed(mc);
+        float targetSpeed = calculatePlayerSpeed(mc);
         
         // Lerp towards target speed
-        currentSpeed = lerp(currentSpeed, targetSpeed, LERP_FACTOR);
+        currentSpeed = lerp(currentSpeed, targetSpeed);
         
         float rotation = calculateNeedleRotation(currentSpeed);
         drawSpeedometer(context, rotation, x, y, alpha);
     }
 
-    private float lerp(float start, float end, float factor) {
-        return start + factor * (end - start);
+    private float lerp(float start, float end) {
+        return start + SpeedometerComponent.LERP_FACTOR * (end - start);
     }
 
     @Override

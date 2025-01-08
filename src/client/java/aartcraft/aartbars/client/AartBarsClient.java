@@ -3,7 +3,12 @@ package aartcraft.aartbars.client;
 import aartcraft.aartbars.AartBars;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
+import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +30,23 @@ public class AartBarsClient implements ClientModInitializer {
             StuckArrowsEvent.EVENT.register((StuckArrowsEvent event) -> {
                 if (!event.isCanceled) {
                     HUDOverlayHandler.INSTANCE.onStuckArrowsRender(event);
+                }
+            });
+
+            // Register key binding for config screen
+            KeyBinding configKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.aartbars.config",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_UNKNOWN, // No default key
+                "category.aartbars.main"
+            ));
+
+            // Register client tick event for key binding
+            ClientTickEvents.END_CLIENT_TICK.register(client -> {
+                while (configKeyBinding.wasPressed()) {
+                    if (client.player != null && client.currentScreen == null) {
+                        client.setScreen(new ConfigScreen(client.currentScreen));
+                    }
                 }
             });
 

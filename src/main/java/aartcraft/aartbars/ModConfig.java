@@ -7,14 +7,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import net.fabricmc.loader.api.FabricLoader;
+import org.jetbrains.annotations.NotNull;
 
-public class ModConfig {
+/**
+ * Configuration class for AartBars mod settings.
+ */
+public final class ModConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final File CONFIG_FILE = new File(
         FabricLoader.getInstance().getConfigDir().toFile(),
         "aartbars.json"
     );
 
+    // Configuration fields with default values
     public boolean showStuckArrows = true;
     public boolean showSpeedometer = true;
     public boolean showThermometer = true;
@@ -30,17 +35,30 @@ public class ModConfig {
     public int brokenBlockTrackerX = 0;
     public int brokenBlockTrackerY = 0;
 
+    private ModConfig() {} // Prevent instantiation
+
+    /**
+     * Loads the configuration from file or creates a new one if it doesn't exist.
+     *
+     * @return the loaded or new configuration
+     */
+    @NotNull
     public static ModConfig load() {
-        if (CONFIG_FILE.exists()) {
-            try (FileReader reader = new FileReader(CONFIG_FILE)) {
-                return GSON.fromJson(reader, ModConfig.class);
-            } catch (IOException e) {
-                AartBars.LOGGER.error("Failed to load config", e);
+        try {
+            if (CONFIG_FILE.exists()) {
+                try (FileReader reader = new FileReader(CONFIG_FILE)) {
+                    return GSON.fromJson(reader, ModConfig.class);
+                }
             }
+        } catch (IOException e) {
+            AartBars.LOGGER.error("Failed to load config", e);
         }
         return new ModConfig();
     }
 
+    /**
+     * Saves the current configuration to file.
+     */
     public void save() {
         try (FileWriter writer = new FileWriter(CONFIG_FILE)) {
             GSON.toJson(this, writer);

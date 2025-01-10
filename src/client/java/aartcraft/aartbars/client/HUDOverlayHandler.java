@@ -20,27 +20,26 @@ public class HUDOverlayHandler implements AartcraftApi {
     public static HUDOverlayHandler INSTANCE;
     private final List<HUDComponent> components = new ArrayList<>();
 
+    public void onRender(DrawContext context) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client == null || client.getWindow() == null) return;
+        
+        int screenWidth = client.getWindow().getScaledWidth();
+        int screenHeight = client.getWindow().getScaledHeight();
+        
+        for (HUDComponent component : components) {
+            try {
+                component.render(context, screenWidth, screenHeight);
+            } catch (Exception e) {
+                AartBarsClient.LOGGER.error("Error rendering HUD component: {}", 
+                    component.getClass().getSimpleName(), e);
+            }
+        }
+    }
+
     public static void init() {
         INSTANCE = new HUDOverlayHandler();
         ModConfig config = AartBarsClient.config;
-
-        // Register HUD rendering using Fabric's HudRenderCallback
-        HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
-            MinecraftClient client = MinecraftClient.getInstance();
-            if (client == null || client.getWindow() == null) return;
-            
-            int screenWidth = client.getWindow().getScaledWidth();
-            int screenHeight = client.getWindow().getScaledHeight();
-            
-            for (HUDComponent component : INSTANCE.components) {
-                try {
-                    component.render(drawContext, screenWidth, screenHeight);
-                } catch (Exception e) {
-                    AartBarsClient.LOGGER.error("Error rendering HUD component: {}", 
-                        component.getClass().getSimpleName(), e);
-                }
-            }
-        });
 
         // Register components based on config
         if (config.showStuckArrows) {

@@ -1,16 +1,47 @@
 package aartcraft.aartbars.api.event;
 
 import net.minecraft.client.gui.DrawContext;
+import org.jetbrains.annotations.NotNull;
+import java.util.Objects;
 
-public class HUDOverlayEvent {
+/**
+ * Base class for HUD overlay events.
+ */
+public final class HUDOverlayEvent {
     public final int x;
     public final int y;
     public final DrawContext context;
-    public boolean isCanceled = false;
+    private boolean canceled = false;
 
-    protected HUDOverlayEvent(int x, int y, DrawContext context) {
+    /**
+     * Creates a new HUDOverlayEvent.
+     *
+     * @param x the x position
+     * @param y the y position
+     * @param context the draw context, must not be null
+     * @throws NullPointerException if context is null
+     */
+    public HUDOverlayEvent(int x, int y, @NotNull DrawContext context) {
         this.x = x;
         this.y = y;
-        this.context = context;
+        this.context = Objects.requireNonNull(context, "DrawContext cannot be null");
+    }
+
+    /**
+     * Checks if the event is canceled.
+     *
+     * @return true if the event is canceled
+     */
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    /**
+     * Sets the canceled state of the event.
+     *
+     * @param canceled the new canceled state
+     */
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
     }
 }

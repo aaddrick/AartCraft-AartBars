@@ -7,17 +7,28 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.Objects;
 
-public class ConfigScreen extends Screen {
+/**
+ * Configuration screen for adjusting HUD component settings.
+ */
+public final class ConfigScreen extends Screen {
     private final Screen parent;
     private final ModConfig config;
 
-    public ConfigScreen(Screen parent, ModConfig config) {
+    /**
+     * Creates a new configuration screen.
+     *
+     * @param parent the parent screen to return to
+     * @param config the mod configuration, must not be null
+     * @throws NullPointerException if config is null
+     */
+    public ConfigScreen(@Nullable Screen parent, @NotNull ModConfig config) {
         super(Text.translatable("text.aartbars.config.title"));
-        // Ensure we have a valid client reference
-        this.client = MinecraftClient.getInstance();
-        this.parent = parent != null ? parent : this.client.currentScreen;
-        this.config = config;
+        this.parent = parent != null ? parent : Objects.requireNonNull(MinecraftClient.getInstance()).currentScreen;
+        this.config = Objects.requireNonNull(config, "ModConfig cannot be null");
     }
 
     @Override

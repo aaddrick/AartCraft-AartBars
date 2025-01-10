@@ -4,6 +4,12 @@ A lightweight Minecraft mod that adds various HUD components requested by my son
 
 ## Features
 
+### Broken Block Tracker
+- Tracks and displays the number of blocks broken by the player
+- Simple text-based display
+- Customizable position (right-aligned with experience bar by default)
+- Resets counter when player dies
+
 ### Stuck Arrows
 - Displays the number of arrows stuck in your player
 - Clean, minimalistic arrow icons
@@ -28,6 +34,13 @@ A lightweight Minecraft mod that adds various HUD components requested by my son
 
 ### Speedometer
 - Measures speed in blocks/tick (1 block/tick = 20 blocks/second)
+
+### Broken Block Tracker
+- Uses client-side block break events for accurate tracking
+- Maintains counter across game sessions
+- Automatically resets when player dies
+- Displays count in simple text format
+- Position can be customized in config
 - Uses position history for accurate speed calculation
 - Smooth interpolation for needle movement
 - 32x32 pixel gauge with rotating needle
@@ -44,6 +57,12 @@ HUDOverlayEvent.StuckArrows.EVENT.register(event -> {
     event.isCanceled = true; // To prevent default rendering
 });
 
+// Broken Block Tracker Event
+HUDOverlayEvent.BrokenBlockTracker.EVENT.register(event -> {
+    // Custom rendering logic
+    event.isCanceled = true; // To prevent default rendering
+});
+
 // Speedometer Event
 HUDOverlayEvent.Speedometer.EVENT.register(event -> {
     // Custom rendering logic
@@ -52,6 +71,7 @@ HUDOverlayEvent.Speedometer.EVENT.register(event -> {
 ```
 
 Key event properties:
+- `blocksBroken`: Current number of blocks broken (Broken Block Tracker Event)
 - `stuckarrows`: Current number of stuck arrows (Stuck Arrows Event)
 - `speed`: Current speed in blocks/tick (Speedometer Event)
 - `x`, `y`: Default render position
@@ -72,7 +92,10 @@ Key event properties:
 
 ## Configuration
 
-The mod works out-of-the-box with default settings. No configuration required!
+The mod works out-of-the-box with default settings. The following components can be configured:
+- Stuck Arrows: Position, visibility
+- Speedometer: Position, visibility
+- Broken Block Tracker: Position, visibility
 
 ## Credits
 

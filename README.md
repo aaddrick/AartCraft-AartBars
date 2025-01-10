@@ -1,6 +1,6 @@
 # AartBars - HUD Components
 
-A lightweight Minecraft mod that adds various HUD components requested by my son Aart.
+A lightweight Minecraft mod that adds various HUD components.
 
 ## Features
 
@@ -8,75 +8,64 @@ A lightweight Minecraft mod that adds various HUD components requested by my son
 - Tracks and displays the number of blocks broken by the player
 - Simple text-based display
 - Customizable position (right-aligned with experience bar by default)
-- Resets counter when player dies
+- Counter persists across game sessions
 
 ### Stuck Arrows
 - Displays the number of arrows stuck in your player
-- Clean, minimalistic arrow icons
-- Subtle shake animation when arrows are added
+- Arrow icon rendering
 - Customizable position (right-aligned with food bar by default)
+- Basic animation when arrow count changes
 
 ### Speedometer
-- Real-time speed measurement
-- Smooth analog needle movement
-- Positioned left of center by default
-- Accurate speed calculation using position history
-- Smooth interpolation for needle movement
+- Measures player movement speed
+- Analog gauge display
+- Customizable position (left of center by default)
+- Smooth interpolation between speed changes
+- Uses position history for accurate speed calculation
+
+### Thermometer
+- Displays current biome temperature
+- Graphical thermometer display
+- Customizable position (left-aligned with health bar by default)
+- Temperature range from -0.5 to 1.5
+- Updates based on player's current biome
 
 ## Technical Details
 
+### Broken Block Tracker
+- Uses static counter for block tracking
+- Basic text rendering with shadow
+- Configurable position offsets
+- Validates position values
+
 ### Stuck Arrows
-- Renders up to 10 arrows per row, with multiple rows if needed
-- Uses Minecraft's native rendering system for optimal performance
-- Includes alpha blending for smooth transitions
-- Shake effect lasts for 1 second (20 ticks) after arrow count changes
-- Icons are 8x8 pixels with 2px spacing
+- Renders up to 10 arrows per row
+- Uses 8x8 pixel arrow icons
+- 2px spacing between arrows
+- Basic shake animation on arrow count change
+- 20 tick animation duration
 
 ### Speedometer
-- Measures speed in blocks/tick (1 block/tick = 20 blocks/second)
+- Uses 10-point position history
+- Linear interpolation for smooth transitions
+- 32x32 pixel gauge display
+- Rotating needle implementation
+- Max speed detection of 40 blocks/second
 
-### Broken Block Tracker
-- Uses client-side block break events for accurate tracking
-- Maintains counter across game sessions
-- Automatically resets when player dies
-- Displays count in simple text format
-- Position can be customized in config
-- Uses position history for accurate speed calculation
-- Smooth interpolation for needle movement
-- 32x32 pixel gauge with rotating needle
-- Max speed detection of 0.3 blocks/tick (6 blocks/second)
+### Thermometer
+- Uses Minecraft's biome temperature system
+- 7-segment thermometer display
+- 15px wide segments
+- 33px tall thermometer
+- Temperature range from -0.5 to 1.5
 
-## Event API
+## Configuration
 
-The mod provides an event-based API for other mods to interact with:
-
-```java
-// Stuck Arrows Event
-HUDOverlayEvent.StuckArrows.EVENT.register(event -> {
-    // Custom rendering logic
-    event.isCanceled = true; // To prevent default rendering
-});
-
-// Broken Block Tracker Event
-HUDOverlayEvent.BrokenBlockTracker.EVENT.register(event -> {
-    // Custom rendering logic
-    event.isCanceled = true; // To prevent default rendering
-});
-
-// Speedometer Event
-HUDOverlayEvent.Speedometer.EVENT.register(event -> {
-    // Custom rendering logic
-    event.isCanceled = true; // To prevent default rendering
-});
-```
-
-Key event properties:
-- `blocksBroken`: Current number of blocks broken (Broken Block Tracker Event)
-- `stuckarrows`: Current number of stuck arrows (Stuck Arrows Event)
-- `speed`: Current speed in blocks/tick (Speedometer Event)
-- `x`, `y`: Default render position
-- `context`: DrawContext for custom rendering
-- `isCanceled`: Set to true to prevent default rendering
+The mod works out-of-the-box with default settings. The following components can be configured:
+- Stuck Arrows: Position, visibility
+- Speedometer: Position, visibility
+- Broken Block Tracker: Position, visibility
+- Thermometer: Position, visibility
 
 ## Installation
 
@@ -87,15 +76,7 @@ Key event properties:
 ## Compatibility
 
 - Works with Fabric API
-- Compatible with most HUD mods
 - Client-side only - no server installation needed
-
-## Configuration
-
-The mod works out-of-the-box with default settings. The following components can be configured:
-- Stuck Arrows: Position, visibility
-- Speedometer: Position, visibility
-- Broken Block Tracker: Position, visibility
 
 ## Credits
 

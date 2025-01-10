@@ -4,7 +4,6 @@ import aartcraft.aartbars.AartBars;
 import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.client.components.BaseHUDComponent;
-import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;

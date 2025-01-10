@@ -1,10 +1,6 @@
 package aartcraft.aartbars.client;
 
 import aartcraft.aartbars.ModConfig;
-import aartcraft.aartbars.client.components.speedometer.SpeedometerEvent;
-import aartcraft.aartbars.client.components.brokenblocktracker.BrokenBlockTrackerEvent;
-import aartcraft.aartbars.client.components.stuckarrows.StuckArrowsEvent;
-import aartcraft.aartbars.client.components.thermometer.ThermometerEvent;
 import aartcraft.aartbars.client.gui.ConfigScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;

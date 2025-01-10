@@ -1,5 +1,6 @@
 package aartcraft.aartbars.client.features.stuckarrows;
 
+import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.client.components.BaseHUDComponent;
 import aartcraft.aartbars.helpers.TextureHelper;

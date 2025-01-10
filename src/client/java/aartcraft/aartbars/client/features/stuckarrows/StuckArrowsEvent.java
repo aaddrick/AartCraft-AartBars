@@ -5,14 +5,16 @@ import aartcraft.aartbars.api.handler.EventHandler;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.gui.DrawContext;
 
+@ApiStatus.Experimental
 public class StuckArrowsEvent extends HUDOverlayEvent {
     public final int stuckarrows;
 
-    public StuckArrowsEvent(int stuckarrows, int x, int y, DrawContext context) {
+    public StuckArrowsEvent(int stuckarrows, int x, int y, @NotNull DrawContext context) {
         super(x, y, context);
         this.stuckarrows = stuckarrows;
     }
 
+    @ApiStatus.Internal
     public static final Event<EventHandler<StuckArrowsEvent>> EVENT =
             EventHandler.createArrayBacked();
 }

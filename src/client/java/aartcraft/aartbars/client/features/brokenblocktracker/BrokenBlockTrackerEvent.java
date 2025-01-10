@@ -5,14 +5,16 @@ import aartcraft.aartbars.api.handler.EventHandler;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.gui.DrawContext;
 
+@ApiStatus.Experimental
 public class BrokenBlockTrackerEvent extends HUDOverlayEvent {
     public final int blocksBroken;
 
-    public BrokenBlockTrackerEvent(int blocksBroken, int x, int y, DrawContext context) {
+    public BrokenBlockTrackerEvent(int blocksBroken, int x, int y, @NotNull DrawContext context) {
         super(x, y, context);
         this.blocksBroken = blocksBroken;
     }
 
+    @ApiStatus.Internal
     public static final Event<EventHandler<BrokenBlockTrackerEvent>> EVENT =
             EventHandler.createArrayBacked();
 }

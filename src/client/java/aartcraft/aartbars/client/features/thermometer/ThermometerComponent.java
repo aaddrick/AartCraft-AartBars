@@ -16,7 +16,16 @@ import java.util.Objects;
 /**
  * HUD component that displays the player's current temperature.
  */
+@ApiStatus.Experimental
 public final class ThermometerComponent extends BaseHUDComponent {
+    /**
+     * HUD component that displays the player's current temperature.
+     * <p>
+     * This component reads the biome temperature at the player's location
+     * and displays it using a thermometer graphic.
+     * <p>
+     * <b>Experimental feature</b>, may be removed or changed without further notice.
+     */
     private static final int NUM_SEGMENTS = 7; // Number of thermometer segments
     private static final float MIN_TEMPERATURE = -0.5f; // Minimum temperature value
     private static final float MAX_TEMPERATURE = 1.5f; // Maximum temperature value

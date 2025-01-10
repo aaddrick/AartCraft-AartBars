@@ -13,7 +13,16 @@ import java.util.Objects;
 /**
  * HUD component that displays the number of blocks broken by the player.
  */
+@ApiStatus.Experimental
 public final class BrokenBlockTrackerComponent extends BaseHUDComponent {
+    /**
+     * HUD component that tracks and displays the number of blocks broken by the player.
+     * <p>
+     * This component listens for block break events and maintains a counter
+     * that is displayed on the HUD.
+     * <p>
+     * <b>Experimental feature</b>, may be removed or changed without further notice.
+     */
     private int blocksBroken = 0;
 
     /**

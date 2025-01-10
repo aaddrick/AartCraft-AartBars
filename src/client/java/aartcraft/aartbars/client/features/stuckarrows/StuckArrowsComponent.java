@@ -16,7 +16,16 @@ import java.util.Random;
 /**
  * HUD component that displays the number of arrows stuck in the player.
  */
+@ApiStatus.Experimental
 public final class StuckArrowsComponent extends BaseHUDComponent {
+    /**
+     * HUD component that displays the number of arrows stuck in the player.
+     * <p>
+     * This component tracks the number of arrows embedded in the player
+     * and displays them using a graphical representation.
+     * <p>
+     * <b>Experimental feature</b>, may be removed or changed without further notice.
+     */
     private static final int SHAKE_DURATION = 20; // Duration of the shake animation in ticks
     private static final int ICON_SIZE = 8; // Size of each arrow icon
     private static final int SPACING = 2; // Spacing between arrow icons

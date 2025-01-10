@@ -2,11 +2,15 @@ package aartcraft.aartbars.api.handler;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.ApiStatus;
+import java.util.Objects;
 
 /**
  * Interface for handling events in the Aartcraft mod.
  * @param <IEvent> The type of event to handle
  */
+@ApiStatus.Internal
 public interface EventHandler<IEvent>
 {
     /**
@@ -14,19 +18,18 @@ public interface EventHandler<IEvent>
      * @param <T> The type of event
      * @return A new Event instance
      */
+    @ApiStatus.Internal
     static <T> Event<EventHandler<T>> createArrayBacked()
     {
         return EventFactory.createArrayBacked(EventHandler.class, listeners -> event -> {
-            if (event == null) {
-                throw new IllegalArgumentException("Event cannot be null");
-            }
+            Objects.requireNonNull(event, "Event cannot be null");
             
             for (EventHandler<T> listener : listeners) {
                 try {
                     listener.interact(event);
                 } catch (Exception e) {
                     // Log the error but continue processing other listeners
-                    System.err.println("Error handling event: " + e.getMessage());
+                    AartBarsClient.LOGGER.error("Error handling event", e);
                 }
             }
         });
@@ -36,5 +39,5 @@ public interface EventHandler<IEvent>
      * Handles the given event.
      * @param event The event to handle
      */
-    void interact(IEvent event);
+    void interact(@NotNull IEvent event);
 }

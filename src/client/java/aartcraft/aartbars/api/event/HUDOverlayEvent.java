@@ -2,14 +2,17 @@ package aartcraft.aartbars.api.event;
 
 import net.minecraft.client.gui.DrawContext;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.ApiStatus;
 import java.util.Objects;
 
 /**
  * Base class for HUD overlay events.
  */
+@ApiStatus.Experimental
 public final class HUDOverlayEvent {
     public final int x;
     public final int y;
+    @NotNull
     public final DrawContext context;
     private boolean canceled = false;
 

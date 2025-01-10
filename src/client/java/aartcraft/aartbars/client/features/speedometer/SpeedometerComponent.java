@@ -18,6 +18,7 @@ import org.joml.Quaternionf;
  * HUD component that displays the player's current speed.
  */
 
+@ApiStatus.Experimental
 public final class SpeedometerComponent extends BaseHUDComponent {
     private static final int HISTORY_SIZE = 10;
     private static final float LERP_FACTOR = 0.2f; // Adjust this for smoother/faster response

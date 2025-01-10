@@ -68,45 +68,7 @@ public class AartBarsClient implements ClientModInitializer {
 
     @ApiStatus.Internal
     private void registerEventHandlers() {
-        StuckArrowsEvent.EVENT.register(event -> {
-            try {
-                if (!event.isCanceled) {
-                    HUDOverlayHandler.INSTANCE.onStuckArrowsRender(event);
-                }
-            } catch (Exception e) {
-                LOGGER.error("Error handling StuckArrowsEvent", e);
-            }
-        });
-        
-        SpeedometerEvent.EVENT.register(event -> {
-            try {
-                if (!event.isCanceled) {
-                    HUDOverlayHandler.INSTANCE.onSpeedometerRender(event);
-                }
-            } catch (Exception e) {
-                LOGGER.error("Error handling SpeedometerEvent", e);
-            }
-        });
-        
-        ThermometerEvent.EVENT.register(event -> {
-            try {
-                if (!event.isCanceled) {
-                    HUDOverlayHandler.INSTANCE.onThermometerRender(event);
-                }
-            } catch (Exception e) {
-                LOGGER.error("Error handling ThermometerEvent", e);
-            }
-        });
-        
-        BrokenBlockTrackerEvent.EVENT.register(event -> {
-            try {
-                if (!event.isCanceled) {
-                    HUDOverlayHandler.INSTANCE.onBrokenBlockTrackerRender(event);
-                }
-            } catch (Exception e) {
-                LOGGER.error("Error handling BrokenBlockTrackerEvent", e);
-            }
-        });
+        // Event handlers are now managed by Fabric's event system
     }
 
     private void handleClientTick(MinecraftClient client) {

@@ -58,6 +58,11 @@ public class HUDOverlayHandler implements AartcraftApi {
     }
 
     @Override
+    public void registerEvents() {
+        // No-op for now, but can be used to register additional events if needed
+    }
+
+    @Override
     public void registerComponent(HUDComponent component) {
         components.add(component);
     }

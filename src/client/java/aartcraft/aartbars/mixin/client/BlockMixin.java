@@ -21,17 +21,7 @@ public class BlockMixin {
     private void onBlockBroken(WorldAccess world, BlockPos pos, BlockState state, CallbackInfo ci) {
         if (world.isClient()) {
             blocksBroken++;
-            MinecraftClient client = MinecraftClient.getInstance();
-            if (client != null) {
-                // Create and fire the event
-                BrokenBlockTrackerEvent.EVENT.invoker().interact(
-                    new BrokenBlockTrackerEvent(
-                        blocksBroken,
-                        0, 0, // These coordinates will be overridden by the component
-                        new DrawContext(client, client.getBufferBuilders().getEntityVertexConsumers())
-                    )
-                );
-            }
+            // The BrokenBlockTrackerComponent will handle this internally
         }
     }
 }

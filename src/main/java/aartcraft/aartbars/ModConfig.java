@@ -19,6 +19,16 @@ public class ModConfig {
     public boolean showSpeedometer = true;
     public boolean showThermometer = true;
     public boolean showBrokenBlockTracker = true;
+    
+    // Offset configuration
+    public int stuckArrowsX = 0;
+    public int stuckArrowsY = 0;
+    public int speedometerX = 0;
+    public int speedometerY = 0;
+    public int thermometerX = 0;
+    public int thermometerY = 0;
+    public int brokenBlockTrackerX = 0;
+    public int brokenBlockTrackerY = 0;
 
     public static ModConfig load() {
         if (CONFIG_FILE.exists()) {

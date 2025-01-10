@@ -10,15 +10,15 @@ import net.minecraft.text.Text;
 public class BrokenBlockTrackerComponent extends BaseHUDComponent {
     private int blocksBroken = 0;
 
-    public BrokenBlockTrackerComponent() {
-        super(0, 0);
+    public BrokenBlockTrackerComponent(ModConfig config) {
+        super(0, 0, config);
     }
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
         if (!AartBarsClient.config.showBrokenBlockTracker) return;
-        this.x = screenWidth / 2 + 93; // Left side position
-        this.y = screenHeight - 20; // Bottom position
+        this.x = screenWidth / 2 + 93 + config.brokenBlockTrackerX; // Left side position
+        this.y = screenHeight - 20 + config.brokenBlockTrackerY; // Bottom position
         
         MinecraftClient mc = MinecraftClient.getInstance();
         if (mc.player == null) return;

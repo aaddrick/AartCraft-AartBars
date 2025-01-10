@@ -9,9 +9,12 @@ public abstract class BaseHUDComponent implements HUDComponent {
     protected int y;
     protected float alpha = 1.0f;
 
-    public BaseHUDComponent(int x, int y) {
+    protected final ModConfig config;
+    
+    public BaseHUDComponent(int x, int y, ModConfig config) {
         this.x = x;
         this.y = y;
+        this.config = config;
     }
 
     @Override

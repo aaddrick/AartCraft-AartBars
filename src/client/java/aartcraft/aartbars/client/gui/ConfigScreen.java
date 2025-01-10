@@ -69,6 +69,82 @@ public class ConfigScreen extends Screen {
             .dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20)
             .build());
 
+        // Stuck Arrows Offset Button
+        this.addDrawableChild(ButtonWidget.builder(
+            Text.translatable("text.aartbars.config.stuck_arrows_offset", 
+                config.stuckArrowsX, config.stuckArrowsY),
+            button -> {
+                this.client.setScreen(new OffsetConfigScreen(
+                    this, config, 
+                    "Stuck Arrows", 
+                    () -> config.stuckArrowsX, 
+                    () -> config.stuckArrowsY,
+                    (x, y) -> {
+                        config.stuckArrowsX = x;
+                        config.stuckArrowsY = y;
+                    }
+                ));
+            })
+            .dimensions(this.width / 2 - 100, this.height / 4 + 120, 200, 20)
+            .build());
+
+        // Speedometer Offset Button
+        this.addDrawableChild(ButtonWidget.builder(
+            Text.translatable("text.aartbars.config.speedometer_offset", 
+                config.speedometerX, config.speedometerY),
+            button -> {
+                this.client.setScreen(new OffsetConfigScreen(
+                    this, config, 
+                    "Speedometer", 
+                    () -> config.speedometerX, 
+                    () -> config.speedometerY,
+                    (x, y) -> {
+                        config.speedometerX = x;
+                        config.speedometerY = y;
+                    }
+                ));
+            })
+            .dimensions(this.width / 2 - 100, this.height / 4 + 144, 200, 20)
+            .build());
+
+        // Thermometer Offset Button
+        this.addDrawableChild(ButtonWidget.builder(
+            Text.translatable("text.aartbars.config.thermometer_offset", 
+                config.thermometerX, config.thermometerY),
+            button -> {
+                this.client.setScreen(new OffsetConfigScreen(
+                    this, config, 
+                    "Thermometer", 
+                    () -> config.thermometerX, 
+                    () -> config.thermometerY,
+                    (x, y) -> {
+                        config.thermometerX = x;
+                        config.thermometerY = y;
+                    }
+                ));
+            })
+            .dimensions(this.width / 2 - 100, this.height / 4 + 168, 200, 20)
+            .build());
+
+        // Broken Block Tracker Offset Button
+        this.addDrawableChild(ButtonWidget.builder(
+            Text.translatable("text.aartbars.config.broken_block_tracker_offset", 
+                config.brokenBlockTrackerX, config.brokenBlockTrackerY),
+            button -> {
+                this.client.setScreen(new OffsetConfigScreen(
+                    this, config, 
+                    "Broken Block Tracker", 
+                    () -> config.brokenBlockTrackerX, 
+                    () -> config.brokenBlockTrackerY,
+                    (x, y) -> {
+                        config.brokenBlockTrackerX = x;
+                        config.brokenBlockTrackerY = y;
+                    }
+                ));
+            })
+            .dimensions(this.width / 2 - 100, this.height / 4 + 192, 200, 20)
+            .build());
+
         // Done Button
         this.addDrawableChild(ButtonWidget.builder(
             Text.translatable("text.aartbars.config.done"),
@@ -78,7 +154,7 @@ public class ConfigScreen extends Screen {
                     this.client.setScreen(parent);
                 }
             })
-            .dimensions(this.width / 2 - 100, this.height / 4 + 120, 200, 20)
+            .dimensions(this.width / 2 - 100, this.height / 4 + 216, 200, 20)
             .build());
     }
 

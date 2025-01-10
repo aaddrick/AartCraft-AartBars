@@ -11,15 +11,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
 public class ThermometerComponent extends BaseHUDComponent {
-    public ThermometerComponent() {
-        super(0, 0);
+    public ThermometerComponent(ModConfig config) {
+        super(0, 0, config);
     }
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
         if (!AartBarsClient.config.showThermometer) return;
-        this.x = screenWidth / 2 + 94;
-        this.y = screenHeight - 58;
+        this.x = screenWidth / 2 + 94 + config.thermometerX;
+        this.y = screenHeight - 58 + config.thermometerY;
         
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerEntity player = mc.player;

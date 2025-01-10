@@ -25,14 +25,16 @@ public class HUDOverlayHandler implements AartcraftApi {
     public static void init() {
         INSTANCE = new HUDOverlayHandler();
 
+        ModConfig config = AartBarsClient.config;
+
         // Register the stuck arrows component
-        INSTANCE.registerComponent(new StuckArrowsComponent());
+        INSTANCE.registerComponent(new StuckArrowsComponent(config));
         // Register the thermometer component
-        INSTANCE.registerComponent(new ThermometerComponent());
+        INSTANCE.registerComponent(new ThermometerComponent(config));
         // Register the broken block tracker component
-        INSTANCE.registerComponent(new BrokenBlockTrackerComponent());
+        INSTANCE.registerComponent(new BrokenBlockTrackerComponent(config));
         // Register the speedometer component
-        INSTANCE.registerComponent(new SpeedometerComponent());
+        INSTANCE.registerComponent(new SpeedometerComponent(config));
 
         // Register events
         StuckArrowsEvent.EVENT.register(INSTANCE::onStuckArrowsRender);

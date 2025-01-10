@@ -18,16 +18,16 @@ public class StuckArrowsComponent extends BaseHUDComponent {
     private static final int SHAKE_DURATION = 20;
     private final Random random = new Random();
 
-    public StuckArrowsComponent() {
-        super(0, 0); // Initialize with 0,0
+    public StuckArrowsComponent(ModConfig config) {
+        super(0, 0, config);
     }
 
     @Override
     public void render(DrawContext context, int screenWidth, int screenHeight) {
         if (!AartBarsClient.config.showStuckArrows) return;
-        // Update position using provided screen dimensions
-        this.x = screenWidth / 2 + 91;
-        this.y = screenHeight - 39;
+        // Update position using config offsets
+        this.x = screenWidth / 2 + 91 + config.stuckArrowsX;
+        this.y = screenHeight - 39 + config.stuckArrowsY;
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerEntity player = mc.player;
         if (player == null) return;

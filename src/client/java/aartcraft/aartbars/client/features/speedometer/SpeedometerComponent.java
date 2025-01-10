@@ -17,8 +17,8 @@ public class SpeedometerComponent extends BaseHUDComponent {
     private float currentSpeed = 0f;
     private static final float LERP_FACTOR = 0.2f; // Adjust this for smoother/faster response
     
-    public SpeedometerComponent() {
-        super(0, 0);
+    public SpeedometerComponent(ModConfig config) {
+        super(0, 0, config);
         Arrays.fill(positionHistory, Vec3d.ZERO);
     }
 
@@ -26,8 +26,8 @@ public class SpeedometerComponent extends BaseHUDComponent {
     public void render(DrawContext context, int screenWidth, int screenHeight) {
         if (!AartBarsClient.config.showSpeedometer) return;
         
-        this.x = screenWidth / 2 + 115;
-        this.y = screenHeight - 58;
+        this.x = screenWidth / 2 + 115 + config.speedometerX;
+        this.y = screenHeight - 58 + config.speedometerY;
         
         MinecraftClient mc = MinecraftClient.getInstance();
         if (mc.player == null || mc.world == null) return;

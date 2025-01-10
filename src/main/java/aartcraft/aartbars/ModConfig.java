@@ -35,7 +35,7 @@ public final class ModConfig {
     public int brokenBlockTrackerX = 0;
     public int brokenBlockTrackerY = 0;
 
-    private ModConfig() {} // Prevent instantiation
+    public ModConfig() {} // Prevent instantiation
 
     /**
      * Validates the configuration values.

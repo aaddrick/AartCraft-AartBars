@@ -4,6 +4,8 @@ import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import aartcraft.aartbars.api.handler.EventHandler;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.gui.DrawContext;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 
 @ApiStatus.Experimental
 public class ThermometerEvent extends HUDOverlayEvent {

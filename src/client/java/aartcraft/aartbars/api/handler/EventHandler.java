@@ -1,5 +1,6 @@
 package aartcraft.aartbars.api.handler;
 
+import aartcraft.aartbars.client.AartBarsClient;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import org.jetbrains.annotations.NotNull;

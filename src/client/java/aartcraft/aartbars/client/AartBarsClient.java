@@ -1,7 +1,9 @@
 package aartcraft.aartbars.client;
 
 import aartcraft.aartbars.ModConfig;
+import aartcraft.aartbars.client.features.speedometer.SpeedometerEvent;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;
+import aartcraft.aartbars.client.features.thermometer.ThermometerEvent;
 import aartcraft.aartbars.client.gui.ConfigScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -10,6 +12,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import org.jetbrains.annotations.ApiStatus;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

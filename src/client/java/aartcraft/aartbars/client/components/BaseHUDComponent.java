@@ -4,7 +4,12 @@ import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import org.jetbrains.annotations.NotNull;
+import java.util.Objects;
 
+/**
+ * Base class for HUD components.
+ */
 public abstract class BaseHUDComponent implements HUDComponent {
     protected int x;
     protected int y;
@@ -12,23 +17,40 @@ public abstract class BaseHUDComponent implements HUDComponent {
 
     protected final ModConfig config;
     
-    public BaseHUDComponent(int x, int y, ModConfig config) {
+    /**
+     * Creates a new BaseHUDComponent.
+     *
+     * @param x the x position
+     * @param y the y position
+     * @param config the mod configuration, must not be null
+     * @throws NullPointerException if config is null
+     */
+    public BaseHUDComponent(int x, int y, @NotNull ModConfig config) {
         this.x = x;
         this.y = y;
-        this.config = config;
+        this.config = Objects.requireNonNull(config, "ModConfig cannot be null");
     }
 
     @Override
-    public void handleEvent(HUDOverlayEvent event) {
+    public void handleEvent(@NotNull HUDOverlayEvent event) {
+        Objects.requireNonNull(event, "HUDOverlayEvent cannot be null");
         // Default implementation does nothing
     }
 
+    /**
+     * Enables alpha blending for rendering.
+     *
+     * @param alpha the alpha value
+     */
     protected void enableAlpha(float alpha) {
         RenderSystem.enableBlend();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
         RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
     }
 
+    /**
+     * Disables alpha blending for rendering.
+     */
     protected void disableAlpha() {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.disableBlend();

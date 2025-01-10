@@ -38,6 +38,28 @@ public final class ModConfig {
     private ModConfig() {} // Prevent instantiation
 
     /**
+     * Validates the configuration values.
+     *
+     * @throws IllegalArgumentException if any configuration value is invalid
+     */
+    public void validate() {
+        validateOffset("stuckArrowsX", stuckArrowsX);
+        validateOffset("stuckArrowsY", stuckArrowsY);
+        validateOffset("speedometerX", speedometerX);
+        validateOffset("speedometerY", speedometerY);
+        validateOffset("thermometerX", thermometerX);
+        validateOffset("thermometerY", thermometerY);
+        validateOffset("brokenBlockTrackerX", brokenBlockTrackerX);
+        validateOffset("brokenBlockTrackerY", brokenBlockTrackerY);
+    }
+
+    private void validateOffset(String fieldName, int value) {
+        if (value < -1000 || value > 1000) {
+            throw new IllegalArgumentException("Invalid offset value for " + fieldName + ": " + value);
+        }
+    }
+
+    /**
      * Loads the configuration from file or creates a new one if it doesn't exist.
      *
      * @return the loaded or new configuration

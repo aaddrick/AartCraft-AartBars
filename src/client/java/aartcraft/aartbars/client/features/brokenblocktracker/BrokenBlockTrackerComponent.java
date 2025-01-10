@@ -32,6 +32,14 @@ public final class BrokenBlockTrackerComponent extends BaseHUDComponent {
         
         if (!AartBarsClient.config.showBrokenBlockTracker) return;
         
+        // Validate config values before use
+        try {
+            config.validate();
+        } catch (IllegalArgumentException e) {
+            AartBars.LOGGER.error("Invalid configuration values: " + e.getMessage());
+            return;
+        }
+        
         this.x = screenWidth / 2 + 93 + config.brokenBlockTrackerX;
         this.y = screenHeight - 20 + config.brokenBlockTrackerY;
         

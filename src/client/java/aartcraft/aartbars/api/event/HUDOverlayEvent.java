@@ -36,7 +36,7 @@ public class HUDOverlayEvent {
      * @return true if the event is canceled
      */
     public boolean isCanceled() {
-        return canceled;
+        return isCanceled;
     }
 
     /**
@@ -45,6 +45,6 @@ public class HUDOverlayEvent {
      * @param canceled the new canceled state
      */
     public void setCanceled(boolean canceled) {
-        this.canceled = canceled;
+        this.isCanceled = canceled;
     }
 }

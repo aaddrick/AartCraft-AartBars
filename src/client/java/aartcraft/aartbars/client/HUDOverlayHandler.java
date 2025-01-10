@@ -7,10 +7,8 @@ import aartcraft.aartbars.client.components.thermometer.ThermometerComponent;
 import aartcraft.aartbars.client.components.brokenblocktracker.BrokenBlockTrackerComponent;
 import aartcraft.aartbars.client.components.speedometer.SpeedometerComponent;
 import aartcraft.aartbars.client.components.HUDComponent;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;

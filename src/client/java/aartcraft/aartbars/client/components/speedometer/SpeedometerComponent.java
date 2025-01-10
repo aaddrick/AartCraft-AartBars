@@ -4,6 +4,7 @@ import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.client.AartBarsClient;
 import aartcraft.aartbars.client.components.BaseHUDComponent;
 import aartcraft.aartbars.helpers.TextureHelper;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;

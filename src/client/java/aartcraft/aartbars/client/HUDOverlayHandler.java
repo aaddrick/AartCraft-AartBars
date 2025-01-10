@@ -12,7 +12,6 @@ import net.minecraft.client.gui.DrawContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class HUDOverlayHandler implements AartcraftApi {
     public static HUDOverlayHandler INSTANCE;

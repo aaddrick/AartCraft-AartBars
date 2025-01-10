@@ -1,5 +1,6 @@
 package aartcraft.aartbars.client;
 
+import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.api.AartcraftApi;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsComponent;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;

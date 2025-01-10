@@ -58,6 +58,7 @@ public class HUDOverlayHandler implements AartcraftApi {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends HUDOverlayEvent> void registerEvent(Class<T> eventClass, EventHandler<T> handler) {
         if (eventClass == StuckArrowsEvent.class) {
             StuckArrowsEvent.EVENT.register((EventHandler<StuckArrowsEvent>) handler);

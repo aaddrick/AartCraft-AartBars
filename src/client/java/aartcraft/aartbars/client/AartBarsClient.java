@@ -2,6 +2,7 @@ package aartcraft.aartbars.client;
 
 import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.client.features.speedometer.SpeedometerEvent;
+import aartcraft.aartbars.client.features.brokenblocktracker.BrokenBlockTrackerEvent;
 import aartcraft.aartbars.client.features.stuckarrows.StuckArrowsEvent;
 import aartcraft.aartbars.client.features.thermometer.ThermometerEvent;
 import aartcraft.aartbars.client.gui.ConfigScreen;

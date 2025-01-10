@@ -1,7 +1,6 @@
 package aartcraft.aartbars.client.components;
 
 import aartcraft.aartbars.ModConfig;
-import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import org.jetbrains.annotations.NotNull;
@@ -31,11 +30,6 @@ public abstract class BaseHUDComponent implements HUDComponent {
         this.config = Objects.requireNonNull(config, "ModConfig cannot be null");
     }
 
-    @Override
-    public void handleEvent(@NotNull HUDOverlayEvent event) {
-        Objects.requireNonNull(event, "HUDOverlayEvent cannot be null");
-        // Default implementation does nothing
-    }
 
     /**
      * Enables alpha blending for rendering.

@@ -10,58 +10,88 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
+import java.util.Objects;
 
-public class ThermometerComponent extends BaseHUDComponent {
-    public ThermometerComponent(ModConfig config) {
+/**
+ * HUD component that displays the player's current temperature.
+ */
+public final class ThermometerComponent extends BaseHUDComponent {
+    private static final int NUM_SEGMENTS = 7; // Number of thermometer segments
+    private static final float MIN_TEMPERATURE = -0.5f; // Minimum temperature value
+    private static final float MAX_TEMPERATURE = 1.5f; // Maximum temperature value
+    private static final int SEGMENT_WIDTH = 15; // Width of each thermometer segment
+    private static final int THERMOMETER_HEIGHT = 33; // Height of the thermometer sprite
+
+    /**
+     * Creates a new ThermometerComponent.
+     *
+     * @param config the mod configuration, must not be null
+     * @throws NullPointerException if config is null
+     */
+    public ThermometerComponent(@NotNull ModConfig config) {
         super(0, 0, config);
     }
 
     @Override
-    public void render(DrawContext context, int screenWidth, int screenHeight) {
+    public void render(@NotNull DrawContext context, int screenWidth, int screenHeight) {
+        Objects.requireNonNull(context, "DrawContext cannot be null");
+
         if (!AartBarsClient.config.showThermometer) return;
+
+        // Update position using config offsets
         this.x = screenWidth / 2 + 94 + config.thermometerX;
         this.y = screenHeight - 58 + config.thermometerY;
-        
+
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerEntity player = mc.player;
         if (player == null || mc.world == null) return;
 
-        BlockPos playerpos = BlockPos.ofFloored(player.getPos());
-        float temperature = mc.world.getBiome(playerpos).value().getTemperature();
-        // AartBars.LOGGER.info(String.valueOf(temperature));
-        
+        BlockPos playerPos = BlockPos.ofFloored(player.getPos());
+        float temperature = mc.world.getBiome(playerPos).value().getTemperature();
+
         drawThermometer(context, temperature, x, y, alpha);
     }
 
     @Override
-    public void handleEvent(HUDOverlayEvent event) {
+    public void handleEvent(@NotNull HUDOverlayEvent event) {
+        Objects.requireNonNull(event, "HUDOverlayEvent cannot be null");
+
         if (event instanceof ThermometerEvent thermometerEvent) {
-            drawThermometer(thermometerEvent.context, thermometerEvent.temperature, 
-                          thermometerEvent.x, thermometerEvent.y, 1f);
+            drawThermometer(thermometerEvent.context, thermometerEvent.temperature,
+                thermometerEvent.x, thermometerEvent.y, 1f);
         }
     }
 
-    private void drawThermometer(DrawContext context, float temperature, int x, int y, float alpha) {
+    /**
+     * Draws the thermometer on the screen.
+     *
+     * @param context the draw context, must not be null
+     * @param temperature the current temperature value
+     * @param x the x position
+     * @param y the y position
+     * @param alpha the alpha value for transparency
+     */
+    private void drawThermometer(@NotNull DrawContext context, float temperature, int x, int y, float alpha) {
+        Objects.requireNonNull(context, "DrawContext cannot be null");
+
         enableAlpha(alpha);
-        
-        // Define min and max temperature range
-        float minTemperature = -0.5f;
-        float maxTemperature = 1.5f;
-        int numSegments = 7; // Number of thermometer segments
-        
-        // Calculate the sprite index programmatically
-        float segmentSize = (maxTemperature - minTemperature) / numSegments;
-        int spriteIndex = (int) ((temperature - minTemperature) / segmentSize);
-        spriteIndex = Math.min(numSegments - 1, Math.max(0, spriteIndex)); // Clamp to valid range (0-6)
-        
+
+        // Calculate the sprite index based on temperature
+        float segmentSize = (MAX_TEMPERATURE - MIN_TEMPERATURE) / NUM_SEGMENTS;
+        int spriteIndex = (int) ((temperature - MIN_TEMPERATURE) / segmentSize);
+        spriteIndex = Math.min(NUM_SEGMENTS - 1, Math.max(0, spriteIndex)); // Clamp to valid range
+
+        // Draw the thermometer segment
         context.drawTexture(
             RenderLayer::getGuiTextured,
             TextureHelper.THERMOMETER_SPRITE,
             x, y,
-            spriteIndex * 15f, 0f, // Select sprite segment (15px wide)
-            15, 33, // Sprite size
-            105, 33 // Texture dimensions (7 segments * 15px = 105px)
+            spriteIndex * SEGMENT_WIDTH, 0f, // Select sprite segment
+            SEGMENT_WIDTH, THERMOMETER_HEIGHT, // Sprite size
+            NUM_SEGMENTS * SEGMENT_WIDTH, THERMOMETER_HEIGHT // Texture dimensions
         );
+
         disableAlpha();
     }
 }

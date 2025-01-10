@@ -6,5 +6,7 @@
   "text.aartbars.config.speedometer": "Speedometer: %s",
   "text.aartbars.config.thermometer": "Thermometer: %s",
   "text.aartbars.config.broken_block_tracker": "Broken Blocks Tracker: %s",
-  "text.aartbars.config.done": "Done"
+  "text.aartbars.config.done": "Done",
+  "text.aartbars.config.x_offset": "X: %d",
+  "text.aartbars.config.y_offset": "Y: %d"
 }

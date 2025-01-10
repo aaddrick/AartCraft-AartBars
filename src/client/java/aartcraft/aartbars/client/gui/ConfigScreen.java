@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
 
 public class ConfigScreen extends Screen {
@@ -21,7 +22,12 @@ public class ConfigScreen extends Screen {
 
     @Override
     protected void init() {
-        // Stuck Arrows Toggle
+        int buttonY = this.height / 4 + 24;
+        int buttonWidth = 100;
+        int offsetFieldWidth = 50;
+        int spacing = 4;
+        
+        // Stuck Arrows Toggle and Offset Fields
         this.addDrawableChild(ButtonWidget.builder(
             Text.translatable("text.aartbars.config.stuck_arrows", 
                 config.showStuckArrows ? "ON" : "OFF"),
@@ -30,10 +36,42 @@ public class ConfigScreen extends Screen {
                 button.setMessage(Text.translatable("text.aartbars.config.stuck_arrows", 
                     config.showStuckArrows ? "ON" : "OFF"));
             })
-            .dimensions(this.width / 2 - 100, this.height / 4 + 24, 200, 20)
+            .dimensions(this.width / 2 - buttonWidth - spacing, buttonY, buttonWidth, 20)
+            .build());
+        
+        // X Offset Field
+        this.addDrawableChild(TextFieldWidget.builder(
+            Text.translatable("text.aartbars.config.x_offset", config.stuckArrowsX),
+            this.textRenderer)
+            .setText(String.valueOf(config.stuckArrowsX))
+            .setChangedListener(value -> {
+                try {
+                    config.stuckArrowsX = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                }
+            })
+            .dimensions(this.width / 2 + spacing, buttonY, offsetFieldWidth, 20)
+            .build());
+        
+        // Y Offset Field
+        this.addDrawableChild(TextFieldWidget.builder(
+            Text.translatable("text.aartbars.config.y_offset", config.stuckArrowsY),
+            this.textRenderer)
+            .setText(String.valueOf(config.stuckArrowsY))
+            .setChangedListener(value -> {
+                try {
+                    config.stuckArrowsY = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                }
+            })
+            .dimensions(this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20)
             .build());
 
-        // Speedometer Toggle
+        buttonY += 24;
+        
+        // Speedometer Toggle and Offset Fields
         this.addDrawableChild(ButtonWidget.builder(
             Text.translatable("text.aartbars.config.speedometer", 
                 config.showSpeedometer ? "ON" : "OFF"),
@@ -42,10 +80,40 @@ public class ConfigScreen extends Screen {
                 button.setMessage(Text.translatable("text.aartbars.config.speedometer", 
                     config.showSpeedometer ? "ON" : "OFF"));
             })
-            .dimensions(this.width / 2 - 100, this.height / 4 + 48, 200, 20)
+            .dimensions(this.width / 2 - buttonWidth - spacing, buttonY, buttonWidth, 20)
+            .build());
+        
+        this.addDrawableChild(TextFieldWidget.builder(
+            Text.translatable("text.aartbars.config.x_offset", config.speedometerX),
+            this.textRenderer)
+            .setText(String.valueOf(config.speedometerX))
+            .setChangedListener(value -> {
+                try {
+                    config.speedometerX = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                }
+            })
+            .dimensions(this.width / 2 + spacing, buttonY, offsetFieldWidth, 20)
+            .build());
+        
+        this.addDrawableChild(TextFieldWidget.builder(
+            Text.translatable("text.aartbars.config.y_offset", config.speedometerY),
+            this.textRenderer)
+            .setText(String.valueOf(config.speedometerY))
+            .setChangedListener(value -> {
+                try {
+                    config.speedometerY = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                }
+            })
+            .dimensions(this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20)
             .build());
 
-        // Thermometer Toggle
+        buttonY += 24;
+        
+        // Thermometer Toggle and Offset Fields
         this.addDrawableChild(ButtonWidget.builder(
             Text.translatable("text.aartbars.config.thermometer", 
                 config.showThermometer ? "ON" : "OFF"),
@@ -54,10 +122,40 @@ public class ConfigScreen extends Screen {
                 button.setMessage(Text.translatable("text.aartbars.config.thermometer", 
                     config.showThermometer ? "ON" : "OFF"));
             })
-            .dimensions(this.width / 2 - 100, this.height / 4 + 72, 200, 20)
+            .dimensions(this.width / 2 - buttonWidth - spacing, buttonY, buttonWidth, 20)
+            .build());
+        
+        this.addDrawableChild(TextFieldWidget.builder(
+            Text.translatable("text.aartbars.config.x_offset", config.thermometerX),
+            this.textRenderer)
+            .setText(String.valueOf(config.thermometerX))
+            .setChangedListener(value -> {
+                try {
+                    config.thermometerX = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                }
+            })
+            .dimensions(this.width / 2 + spacing, buttonY, offsetFieldWidth, 20)
+            .build());
+        
+        this.addDrawableChild(TextFieldWidget.builder(
+            Text.translatable("text.aartbars.config.y_offset", config.thermometerY),
+            this.textRenderer)
+            .setText(String.valueOf(config.thermometerY))
+            .setChangedListener(value -> {
+                try {
+                    config.thermometerY = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                }
+            })
+            .dimensions(this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20)
             .build());
 
-        // Broken Block Tracker Toggle
+        buttonY += 24;
+        
+        // Broken Block Tracker Toggle and Offset Fields
         this.addDrawableChild(ButtonWidget.builder(
             Text.translatable("text.aartbars.config.broken_block_tracker", 
                 config.showBrokenBlockTracker ? "ON" : "OFF"),
@@ -66,7 +164,35 @@ public class ConfigScreen extends Screen {
                 button.setMessage(Text.translatable("text.aartbars.config.broken_block_tracker", 
                     config.showBrokenBlockTracker ? "ON" : "OFF"));
             })
-            .dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20)
+            .dimensions(this.width / 2 - buttonWidth - spacing, buttonY, buttonWidth, 20)
+            .build());
+        
+        this.addDrawableChild(TextFieldWidget.builder(
+            Text.translatable("text.aartbars.config.x_offset", config.brokenBlockTrackerX),
+            this.textRenderer)
+            .setText(String.valueOf(config.brokenBlockTrackerX))
+            .setChangedListener(value -> {
+                try {
+                    config.brokenBlockTrackerX = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                }
+            })
+            .dimensions(this.width / 2 + spacing, buttonY, offsetFieldWidth, 20)
+            .build());
+        
+        this.addDrawableChild(TextFieldWidget.builder(
+            Text.translatable("text.aartbars.config.y_offset", config.brokenBlockTrackerY),
+            this.textRenderer)
+            .setText(String.valueOf(config.brokenBlockTrackerY))
+            .setChangedListener(value -> {
+                try {
+                    config.brokenBlockTrackerY = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    // Handle invalid input
+                }
+            })
+            .dimensions(this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20)
             .build());
 
         // Stuck Arrows Offset Button

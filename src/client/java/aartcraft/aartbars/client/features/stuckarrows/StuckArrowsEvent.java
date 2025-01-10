@@ -4,6 +4,7 @@ import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import aartcraft.aartbars.api.handler.EventHandler;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.gui.DrawContext;
+import org.jetbrains.annotations.ApiStatus;
 
 @ApiStatus.Experimental
 public class StuckArrowsEvent extends HUDOverlayEvent {

@@ -23,6 +23,24 @@ public class HUDOverlayHandler implements AartcraftApi {
         INSTANCE = new HUDOverlayHandler();
         ModConfig config = AartBarsClient.config;
 
+        // Register HUD rendering using Fabric's HudRenderCallback
+        HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client == null || client.getWindow() == null) return;
+            
+            int screenWidth = client.getWindow().getScaledWidth();
+            int screenHeight = client.getWindow().getScaledHeight();
+            
+            for (HUDComponent component : INSTANCE.components) {
+                try {
+                    component.render(drawContext, screenWidth, screenHeight);
+                } catch (Exception e) {
+                    AartBarsClient.LOGGER.error("Error rendering HUD component: {}", 
+                        component.getClass().getSimpleName(), e);
+                }
+            }
+        });
+
         // Register components based on config
         if (config.showStuckArrows) {
             INSTANCE.registerComponent(new StuckArrowsComponent(config));
@@ -41,25 +59,5 @@ public class HUDOverlayHandler implements AartcraftApi {
     @Override
     public void registerComponent(HUDComponent component) {
         components.add(component);
-    }
-
-    public void onRender(DrawContext context) {
-        Objects.requireNonNull(context, "DrawContext cannot be null");
-        
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client == null || client.getWindow() == null) {
-            return;
-        }
-
-        int screenWidth = client.getWindow().getScaledWidth();
-        int screenHeight = client.getWindow().getScaledHeight();
-
-        for (HUDComponent component : components) {
-            try {
-                component.render(context, screenWidth, screenHeight);
-            } catch (Exception e) {
-                AartBarsClient.LOGGER.error("Error rendering HUD component: {}", component.getClass().getSimpleName(), e);
-            }
-        }
     }
 }

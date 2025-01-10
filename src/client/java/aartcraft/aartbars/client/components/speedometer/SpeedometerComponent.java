@@ -38,6 +38,15 @@ public final class SpeedometerComponent extends BaseHUDComponent {
     public SpeedometerComponent(@NotNull ModConfig config) {
         super(0, 0, config);
         Arrays.fill(positionHistory, Vec3d.ZERO);
+        
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.player != null) {
+                // Calculate target speed
+                float targetSpeed = calculatePlayerSpeed(client);
+                // Lerp towards target speed
+                currentSpeed = lerp(currentSpeed, targetSpeed);
+            }
+        });
     }
 
     @Override
@@ -50,29 +59,9 @@ public final class SpeedometerComponent extends BaseHUDComponent {
         this.x = screenWidth / 2 + 115 + config.speedometerX;
         this.y = screenHeight - 58 + config.speedometerY;
 
-        MinecraftClient mc = MinecraftClient.getInstance();
-        if (mc == null || mc.player == null || mc.world == null) return;
-
-        // Calculate target speed
-        float targetSpeed = calculatePlayerSpeed(mc);
-
-        // Lerp towards target speed
-        currentSpeed = lerp(currentSpeed, targetSpeed);
-
         // Calculate needle rotation and render the speedometer
         float rotation = calculateNeedleRotation(currentSpeed);
         drawSpeedometer(context, rotation, x, y, alpha);
-    }
-
-    @Override
-    public void handleEvent(@NotNull HUDOverlayEvent event) {
-        Objects.requireNonNull(event, "HUDOverlayEvent cannot be null");
-
-        if (event instanceof SpeedometerEvent speedEvent) {
-            drawSpeedometer(speedEvent.context,
-                calculateNeedleRotation(currentSpeed),
-                speedEvent.x, speedEvent.y, 1f);
-        }
     }
 
     /**

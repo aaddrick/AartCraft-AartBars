@@ -66,12 +66,8 @@ public final class BrokenBlockTrackerComponent extends BaseHUDComponent {
         );
     }
 
-    @Override
-    public void handleEvent(@NotNull HUDOverlayEvent event) {
-        Objects.requireNonNull(event, "HUDOverlayEvent cannot be null");
-        
-        if (event instanceof BrokenBlockTrackerEvent trackerEvent) {
-            this.blocksBroken = trackerEvent.blocksBroken;
-        }
+    // Update blocks broken count from mixin or other source
+    public void incrementBlocksBroken() {
+        blocksBroken++;
     }
 }

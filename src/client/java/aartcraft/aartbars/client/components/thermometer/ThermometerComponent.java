@@ -63,15 +63,6 @@ public final class ThermometerComponent extends BaseHUDComponent {
         drawThermometer(context, temperature, x, y, alpha);
     }
 
-    @Override
-    public void handleEvent(@NotNull HUDOverlayEvent event) {
-        Objects.requireNonNull(event, "HUDOverlayEvent cannot be null");
-
-        if (event instanceof ThermometerEvent thermometerEvent) {
-            drawThermometer(thermometerEvent.context, thermometerEvent.temperature,
-                thermometerEvent.x, thermometerEvent.y, 1f);
-        }
-    }
 
     /**
      * Draws the thermometer on the screen.

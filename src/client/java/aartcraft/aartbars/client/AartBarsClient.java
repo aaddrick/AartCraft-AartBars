@@ -71,8 +71,10 @@ public class AartBarsClient implements ClientModInitializer {
     @ApiStatus.Internal
     private void registerEventHandlers() {
         // Register client-side block break event for broken block tracker
-        ClientPlayerBlockBreakEvents.AFTER.register((pos, state) -> {
-            BrokenBlockTrackerComponent.incrementBrokenBlocks();
+        ClientPlayerBlockBreakEvents.AFTER.register((world, player, pos, state) -> {
+            if (player == MinecraftClient.getInstance().player) {
+                BrokenBlockTrackerComponent.incrementBrokenBlocks();
+            }
         });
     }
 

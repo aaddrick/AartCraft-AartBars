@@ -40,34 +40,36 @@ public class ConfigScreen extends Screen {
             .build());
         
         // X Offset Field
-        this.addDrawableChild(TextFieldWidget.builder(
-            Text.translatable("text.aartbars.config.x_offset", config.stuckArrowsX),
-            this.textRenderer)
-            .setText(String.valueOf(config.stuckArrowsX))
-            .setChangedListener(value -> {
-                try {
-                    config.stuckArrowsX = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                }
-            })
-            .dimensions(this.width / 2 + spacing, buttonY, offsetFieldWidth, 20)
-            .build());
+        TextFieldWidget stuckArrowsXField = new TextFieldWidget(
+            this.textRenderer,
+            this.width / 2 + spacing, buttonY, offsetFieldWidth, 20,
+            Text.translatable("text.aartbars.config.x_offset", config.stuckArrowsX)
+        );
+        stuckArrowsXField.setText(String.valueOf(config.stuckArrowsX));
+        stuckArrowsXField.setChangedListener(value -> {
+            try {
+                config.stuckArrowsX = Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                config.stuckArrowsX = 0;
+            }
+        });
+        this.addDrawableChild(stuckArrowsXField);
         
         // Y Offset Field
-        this.addDrawableChild(TextFieldWidget.builder(
-            Text.translatable("text.aartbars.config.y_offset", config.stuckArrowsY),
-            this.textRenderer)
-            .setText(String.valueOf(config.stuckArrowsY))
-            .setChangedListener(value -> {
-                try {
-                    config.stuckArrowsY = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                }
-            })
-            .dimensions(this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20)
-            .build());
+        TextFieldWidget stuckArrowsYField = new TextFieldWidget(
+            this.textRenderer,
+            this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20,
+            Text.translatable("text.aartbars.config.y_offset", config.stuckArrowsY)
+        );
+        stuckArrowsYField.setText(String.valueOf(config.stuckArrowsY));
+        stuckArrowsYField.setChangedListener(value -> {
+            try {
+                config.stuckArrowsY = Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                config.stuckArrowsY = 0;
+            }
+        });
+        this.addDrawableChild(stuckArrowsYField);
 
         buttonY += 24;
         
@@ -83,33 +85,37 @@ public class ConfigScreen extends Screen {
             .dimensions(this.width / 2 - buttonWidth - spacing, buttonY, buttonWidth, 20)
             .build());
         
-        this.addDrawableChild(TextFieldWidget.builder(
-            Text.translatable("text.aartbars.config.x_offset", config.speedometerX),
-            this.textRenderer)
-            .setText(String.valueOf(config.speedometerX))
-            .setChangedListener(value -> {
-                try {
-                    config.speedometerX = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                }
-            })
-            .dimensions(this.width / 2 + spacing, buttonY, offsetFieldWidth, 20)
-            .build());
+        // X Offset Field
+        TextFieldWidget speedometerXField = new TextFieldWidget(
+            this.textRenderer,
+            this.width / 2 + spacing, buttonY, offsetFieldWidth, 20,
+            Text.translatable("text.aartbars.config.x_offset", config.speedometerX)
+        );
+        speedometerXField.setText(String.valueOf(config.speedometerX));
+        speedometerXField.setChangedListener(value -> {
+            try {
+                config.speedometerX = Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                config.speedometerX = 0;
+            }
+        });
+        this.addDrawableChild(speedometerXField);
         
-        this.addDrawableChild(TextFieldWidget.builder(
-            Text.translatable("text.aartbars.config.y_offset", config.speedometerY),
-            this.textRenderer)
-            .setText(String.valueOf(config.speedometerY))
-            .setChangedListener(value -> {
-                try {
-                    config.speedometerY = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                }
-            })
-            .dimensions(this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20)
-            .build());
+        // Y Offset Field
+        TextFieldWidget speedometerYField = new TextFieldWidget(
+            this.textRenderer,
+            this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20,
+            Text.translatable("text.aartbars.config.y_offset", config.speedometerY)
+        );
+        speedometerYField.setText(String.valueOf(config.speedometerY));
+        speedometerYField.setChangedListener(value -> {
+            try {
+                config.speedometerY = Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                config.speedometerY = 0;
+            }
+        });
+        this.addDrawableChild(speedometerYField);
 
         buttonY += 24;
         
@@ -125,33 +131,37 @@ public class ConfigScreen extends Screen {
             .dimensions(this.width / 2 - buttonWidth - spacing, buttonY, buttonWidth, 20)
             .build());
         
-        this.addDrawableChild(TextFieldWidget.builder(
-            Text.translatable("text.aartbars.config.x_offset", config.thermometerX),
-            this.textRenderer)
-            .setText(String.valueOf(config.thermometerX))
-            .setChangedListener(value -> {
-                try {
-                    config.thermometerX = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                }
-            })
-            .dimensions(this.width / 2 + spacing, buttonY, offsetFieldWidth, 20)
-            .build());
+        // X Offset Field
+        TextFieldWidget thermometerXField = new TextFieldWidget(
+            this.textRenderer,
+            this.width / 2 + spacing, buttonY, offsetFieldWidth, 20,
+            Text.translatable("text.aartbars.config.x_offset", config.thermometerX)
+        );
+        thermometerXField.setText(String.valueOf(config.thermometerX));
+        thermometerXField.setChangedListener(value -> {
+            try {
+                config.thermometerX = Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                config.thermometerX = 0;
+            }
+        });
+        this.addDrawableChild(thermometerXField);
         
-        this.addDrawableChild(TextFieldWidget.builder(
-            Text.translatable("text.aartbars.config.y_offset", config.thermometerY),
-            this.textRenderer)
-            .setText(String.valueOf(config.thermometerY))
-            .setChangedListener(value -> {
-                try {
-                    config.thermometerY = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                }
-            })
-            .dimensions(this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20)
-            .build());
+        // Y Offset Field
+        TextFieldWidget thermometerYField = new TextFieldWidget(
+            this.textRenderer,
+            this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20,
+            Text.translatable("text.aartbars.config.y_offset", config.thermometerY)
+        );
+        thermometerYField.setText(String.valueOf(config.thermometerY));
+        thermometerYField.setChangedListener(value -> {
+            try {
+                config.thermometerY = Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                config.thermometerY = 0;
+            }
+        });
+        this.addDrawableChild(thermometerYField);
 
         buttonY += 24;
         
@@ -167,33 +177,37 @@ public class ConfigScreen extends Screen {
             .dimensions(this.width / 2 - buttonWidth - spacing, buttonY, buttonWidth, 20)
             .build());
         
-        this.addDrawableChild(TextFieldWidget.builder(
-            Text.translatable("text.aartbars.config.x_offset", config.brokenBlockTrackerX),
-            this.textRenderer)
-            .setText(String.valueOf(config.brokenBlockTrackerX))
-            .setChangedListener(value -> {
-                try {
-                    config.brokenBlockTrackerX = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                }
-            })
-            .dimensions(this.width / 2 + spacing, buttonY, offsetFieldWidth, 20)
-            .build());
+        // X Offset Field
+        TextFieldWidget brokenBlockTrackerXField = new TextFieldWidget(
+            this.textRenderer,
+            this.width / 2 + spacing, buttonY, offsetFieldWidth, 20,
+            Text.translatable("text.aartbars.config.x_offset", config.brokenBlockTrackerX)
+        );
+        brokenBlockTrackerXField.setText(String.valueOf(config.brokenBlockTrackerX));
+        brokenBlockTrackerXField.setChangedListener(value -> {
+            try {
+                config.brokenBlockTrackerX = Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                config.brokenBlockTrackerX = 0;
+            }
+        });
+        this.addDrawableChild(brokenBlockTrackerXField);
         
-        this.addDrawableChild(TextFieldWidget.builder(
-            Text.translatable("text.aartbars.config.y_offset", config.brokenBlockTrackerY),
-            this.textRenderer)
-            .setText(String.valueOf(config.brokenBlockTrackerY))
-            .setChangedListener(value -> {
-                try {
-                    config.brokenBlockTrackerY = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    // Handle invalid input
-                }
-            })
-            .dimensions(this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20)
-            .build());
+        // Y Offset Field
+        TextFieldWidget brokenBlockTrackerYField = new TextFieldWidget(
+            this.textRenderer,
+            this.width / 2 + offsetFieldWidth + spacing * 2, buttonY, offsetFieldWidth, 20,
+            Text.translatable("text.aartbars.config.y_offset", config.brokenBlockTrackerY)
+        );
+        brokenBlockTrackerYField.setText(String.valueOf(config.brokenBlockTrackerY));
+        brokenBlockTrackerYField.setChangedListener(value -> {
+            try {
+                config.brokenBlockTrackerY = Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                config.brokenBlockTrackerY = 0;
+            }
+        });
+        this.addDrawableChild(brokenBlockTrackerYField);
 
         // Stuck Arrows Offset Button
         this.addDrawableChild(ButtonWidget.builder(

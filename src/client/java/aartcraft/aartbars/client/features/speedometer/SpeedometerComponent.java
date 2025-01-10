@@ -64,10 +64,6 @@ public final class SpeedometerComponent extends BaseHUDComponent {
         drawSpeedometer(context, rotation, x, y, alpha);
     }
 
-    private float lerp(float start, float end) {
-        return start + SpeedometerComponent.LERP_FACTOR * (end - start);
-    }
-
     @Override
     public void handleEvent(@NotNull HUDOverlayEvent event) {
         Objects.requireNonNull(event, "HUDOverlayEvent cannot be null");

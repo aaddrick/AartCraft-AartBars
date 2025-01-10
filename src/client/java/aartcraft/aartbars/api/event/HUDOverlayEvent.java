@@ -9,12 +9,12 @@ import java.util.Objects;
  * Base class for HUD overlay events.
  */
 @ApiStatus.Experimental
-public final class HUDOverlayEvent {
+public class HUDOverlayEvent {
     public final int x;
     public final int y;
     @NotNull
     public final DrawContext context;
-    private boolean canceled = false;
+    public boolean isCanceled = false;
 
     /**
      * Creates a new HUDOverlayEvent.

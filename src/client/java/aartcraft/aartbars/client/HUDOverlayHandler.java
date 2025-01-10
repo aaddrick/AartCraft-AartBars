@@ -68,36 +68,75 @@ public class HUDOverlayHandler implements AartcraftApi {
         }
     }
 
-    public void onRender(DrawContext context) {
-        int screenWidth = MinecraftClient.getInstance().getWindow().getScaledWidth();
-        int screenHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
+    public void onRender(@NotNull DrawContext context) {
+        Objects.requireNonNull(context, "DrawContext cannot be null");
+        
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client == null || client.getWindow() == null) {
+            return;
+        }
+
+        int screenWidth = client.getWindow().getScaledWidth();
+        int screenHeight = client.getWindow().getScaledHeight();
 
         for (HUDComponent component : components) {
-            component.render(context, screenWidth, screenHeight);
+            try {
+                component.render(context, screenWidth, screenHeight);
+            } catch (Exception e) {
+                AartBarsClient.LOGGER.error("Error rendering HUD component: {}", component.getClass().getSimpleName(), e);
+            }
         }
     }
 
-    public void onStuckArrowsRender(StuckArrowsEvent event) {
+    public void onStuckArrowsRender(@NotNull StuckArrowsEvent event) {
+        Objects.requireNonNull(event, "StuckArrowsEvent cannot be null");
+        
         for (HUDComponent component : components) {
-            component.handleEvent(event);
+            try {
+                component.handleEvent(event);
+            } catch (Exception e) {
+                AartBarsClient.LOGGER.error("Error handling StuckArrowsEvent in component: {}", 
+                    component.getClass().getSimpleName(), e);
+            }
         }
     }
 
-    public void onThermometerRender(ThermometerEvent event) {
+    public void onThermometerRender(@NotNull ThermometerEvent event) {
+        Objects.requireNonNull(event, "ThermometerEvent cannot be null");
+        
         for (HUDComponent component : components) {
-            component.handleEvent(event);
+            try {
+                component.handleEvent(event);
+            } catch (Exception e) {
+                AartBarsClient.LOGGER.error("Error handling ThermometerEvent in component: {}", 
+                    component.getClass().getSimpleName(), e);
+            }
         }
     }
 
-    public void onBrokenBlockTrackerRender(BrokenBlockTrackerEvent event) {
+    public void onBrokenBlockTrackerRender(@NotNull BrokenBlockTrackerEvent event) {
+        Objects.requireNonNull(event, "BrokenBlockTrackerEvent cannot be null");
+        
         for (HUDComponent component : components) {
-            component.handleEvent(event);
+            try {
+                component.handleEvent(event);
+            } catch (Exception e) {
+                AartBarsClient.LOGGER.error("Error handling BrokenBlockTrackerEvent in component: {}", 
+                    component.getClass().getSimpleName(), e);
+            }
         }
     }
 
-    public void onSpeedometerRender(SpeedometerEvent event) {
+    public void onSpeedometerRender(@NotNull SpeedometerEvent event) {
+        Objects.requireNonNull(event, "SpeedometerEvent cannot be null");
+        
         for (HUDComponent component : components) {
-            component.handleEvent(event);
+            try {
+                component.handleEvent(event);
+            } catch (Exception e) {
+                AartBarsClient.LOGGER.error("Error handling SpeedometerEvent in component: {}", 
+                    component.getClass().getSimpleName(), e);
+            }
         }
     }
 }

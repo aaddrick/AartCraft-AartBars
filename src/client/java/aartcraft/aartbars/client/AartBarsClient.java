@@ -24,21 +24,29 @@ public class AartBarsClient implements ClientModInitializer {
         try {
             LOGGER.info("Initializing Aartcraft ArrowHUD client");
 
-            // Load config
+            // Load and validate config
             config = ModConfig.load();
+            try {
+                config.validate();
+            } catch (IllegalArgumentException e) {
+                LOGGER.error("Invalid configuration values: {}", e.getMessage());
+                config = new ModConfig(); // Fallback to default config
+            }
 
             // Register HUD render callback
-            HudRenderCallback.EVENT.register((drawContext, tickDelta) -> HUDOverlayHandler.INSTANCE.onRender(drawContext));
+            HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
+                try {
+                    HUDOverlayHandler.INSTANCE.onRender(drawContext);
+                } catch (Exception e) {
+                    LOGGER.error("Error during HUD rendering", e);
+                }
+            });
 
             // Initialize the HUD overlay handler
             HUDOverlayHandler.init();
 
-            // Register event handlers
-            StuckArrowsEvent.EVENT.register((StuckArrowsEvent event) -> {
-                if (!event.isCanceled) {
-                    HUDOverlayHandler.INSTANCE.onStuckArrowsRender(event);
-                }
-            });
+            // Register all event handlers
+            registerEventHandlers();
 
             // Register key binding for config screen
             configKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -58,11 +66,58 @@ public class AartBarsClient implements ClientModInitializer {
         }
     }
 
-    private void handleClientTick(MinecraftClient client) {
-        while (configKeyBinding.wasPressed()) {
-            if (client.player != null && client.currentScreen == null) {
-                client.setScreen(new ConfigScreen(client.currentScreen, config));
+    @ApiStatus.Internal
+    private void registerEventHandlers() {
+        StuckArrowsEvent.EVENT.register(event -> {
+            try {
+                if (!event.isCanceled) {
+                    HUDOverlayHandler.INSTANCE.onStuckArrowsRender(event);
+                }
+            } catch (Exception e) {
+                LOGGER.error("Error handling StuckArrowsEvent", e);
             }
+        });
+        
+        SpeedometerEvent.EVENT.register(event -> {
+            try {
+                if (!event.isCanceled) {
+                    HUDOverlayHandler.INSTANCE.onSpeedometerRender(event);
+                }
+            } catch (Exception e) {
+                LOGGER.error("Error handling SpeedometerEvent", e);
+            }
+        });
+        
+        ThermometerEvent.EVENT.register(event -> {
+            try {
+                if (!event.isCanceled) {
+                    HUDOverlayHandler.INSTANCE.onThermometerRender(event);
+                }
+            } catch (Exception e) {
+                LOGGER.error("Error handling ThermometerEvent", e);
+            }
+        });
+        
+        BrokenBlockTrackerEvent.EVENT.register(event -> {
+            try {
+                if (!event.isCanceled) {
+                    HUDOverlayHandler.INSTANCE.onBrokenBlockTrackerRender(event);
+                }
+            } catch (Exception e) {
+                LOGGER.error("Error handling BrokenBlockTrackerEvent", e);
+            }
+        });
+    }
+
+    private void handleClientTick(MinecraftClient client) {
+        try {
+            while (configKeyBinding.wasPressed()) {
+                if (client.player != null && client.currentScreen == null) {
+                    client.setScreen(new ConfigScreen(client.currentScreen, config));
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error during client tick handling", e);
         }
     }
 }

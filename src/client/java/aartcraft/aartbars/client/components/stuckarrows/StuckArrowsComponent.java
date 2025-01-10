@@ -80,7 +80,7 @@ public final class StuckArrowsComponent extends BaseHUDComponent {
 
         if (event instanceof StuckArrowsEvent stuckArrowsEvent) {
             if (!stuckArrowsEvent.isCanceled && stuckArrowsEvent.stuckarrows > 0) {
-                drawStuckArrowsOverlay(stuckArrowsEvent, MinecraftClient.getInstance(), 1f);
+                drawStuckArrowsOverlay(stuckArrowsEvent, MinecraftClient.getInstance());
             }
         }
     }
@@ -89,14 +89,13 @@ public final class StuckArrowsComponent extends BaseHUDComponent {
      * Draws the stuck arrows overlay.
      *
      * @param event the StuckArrowsEvent containing rendering data
-     * @param mc the Minecraft client instance
-     * @param alpha the alpha value for transparency
+     * @param mc    the Minecraft client instance
      */
-    private void drawStuckArrowsOverlay(@NotNull StuckArrowsEvent event, @NotNull MinecraftClient mc, float alpha) {
+    private void drawStuckArrowsOverlay(@NotNull StuckArrowsEvent event, @NotNull MinecraftClient mc) {
         Objects.requireNonNull(event, "StuckArrowsEvent cannot be null");
         Objects.requireNonNull(mc, "MinecraftClient cannot be null");
 
-        drawStuckArrowsOverlay(event.context, event.stuckarrows, mc, event.x, event.y, alpha);
+        drawStuckArrowsOverlay(event.context, event.stuckarrows, mc, event.x, event.y, (float) 1.0);
     }
 
     /**

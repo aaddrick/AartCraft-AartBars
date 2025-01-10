@@ -1,4 +1,4 @@
-package aartcraft.aartbars.client.features.speedometer;
+package aartcraft.aartbars.client.components.speedometer;
 
 import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.client.AartBarsClient;

@@ -1,4 +1,4 @@
-package aartcraft.aartbars.client.features.stuckarrows;
+package aartcraft.aartbars.client.components.stuckarrows;
 
 import aartcraft.aartbars.api.event.HUDOverlayEvent;
 import aartcraft.aartbars.api.handler.EventHandler;

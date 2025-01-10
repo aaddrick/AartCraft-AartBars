@@ -1,4 +1,4 @@
-package aartcraft.aartbars.client.features.brokenblocktracker;
+package aartcraft.aartbars.client.components.brokenblocktracker;
 
 import aartcraft.aartbars.AartBars;
 import aartcraft.aartbars.ModConfig;

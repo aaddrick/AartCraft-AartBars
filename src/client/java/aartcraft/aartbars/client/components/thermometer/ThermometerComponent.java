@@ -1,4 +1,4 @@
-package aartcraft.aartbars.client.features.thermometer;
+package aartcraft.aartbars.client.components.thermometer;
 
 import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.client.AartBarsClient;

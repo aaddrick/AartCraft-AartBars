@@ -1,4 +1,4 @@
-package aartcraft.aartbars.client.features.stuckarrows;
+package aartcraft.aartbars.client.components.stuckarrows;
 
 import aartcraft.aartbars.ModConfig;
 import aartcraft.aartbars.client.AartBarsClient;

@@ -46,7 +46,7 @@ public final class BrokenBlockTrackerComponent extends BaseHUDComponent {
         try {
             config.validate();
         } catch (IllegalArgumentException e) {
-            AartBars.LOGGER.error("Invalid configuration values: " + e.getMessage());
+            AartBars.LOGGER.error("Invalid configuration values: {}", e.getMessage());
             return;
         }
         

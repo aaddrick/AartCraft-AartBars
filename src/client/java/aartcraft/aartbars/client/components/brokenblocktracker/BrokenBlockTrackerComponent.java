@@ -24,7 +24,11 @@ public final class BrokenBlockTrackerComponent extends BaseHUDComponent {
      * <p>
      * <b>Experimental feature</b>, may be removed or changed without further notice.
      */
-    private int blocksBroken = 0;
+    private static int blocksBroken = 0;
+    
+    public static void incrementBrokenBlocks() {
+        blocksBroken++;
+    }
 
     /**
      * Creates a new BrokenBlockTrackerComponent.

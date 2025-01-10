@@ -6,6 +6,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import aartcraft.aartbars.client.components.brokenblocktracker.BrokenBlockTrackerComponent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -68,7 +70,12 @@ public class AartBarsClient implements ClientModInitializer {
 
     @ApiStatus.Internal
     private void registerEventHandlers() {
-        // Event handlers are now managed by Fabric's event system
+        // Register block break event for broken block tracker
+        PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
+            if (player == MinecraftClient.getInstance().player) {
+                BrokenBlockTrackerComponent.incrementBrokenBlocks();
+            }
+        });
     }
 
     private void handleClientTick(MinecraftClient client) {

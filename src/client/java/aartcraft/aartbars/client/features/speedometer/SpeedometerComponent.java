@@ -26,8 +26,8 @@ public class SpeedometerComponent extends BaseHUDComponent {
     public void render(DrawContext context, int screenWidth, int screenHeight) {
         if (!AartBarsClient.config.showSpeedometer) return;
         
-        this.x = screenWidth / 2 - 100;
-        this.y = screenHeight - 50;
+        this.x = screenWidth / 2 + 115;
+        this.y = screenHeight - 58;
         
         MinecraftClient mc = MinecraftClient.getInstance();
         if (mc.player == null || mc.world == null) return;

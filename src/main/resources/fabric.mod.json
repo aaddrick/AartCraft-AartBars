@@ -17,7 +17,6 @@
       "aartcraft.aartbars.AartBars"
     ]
   },
-  "mixins": [],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",

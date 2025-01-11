@@ -3,9 +3,7 @@
   "minVersion": "0.8",
   "package": "aartcraft.aartbars.mixin.client",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "ExampleMixin"
-  ],
+  "mixins": [],
   "injectors": {
     "defaultRequire": 1
   }

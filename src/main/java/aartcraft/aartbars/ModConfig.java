@@ -69,12 +69,16 @@ public final class ModConfig {
         try {
             if (CONFIG_FILE.exists()) {
                 try (FileReader reader = new FileReader(CONFIG_FILE)) {
-                    return GSON.fromJson(reader, ModConfig.class);
+                    ModConfig config = GSON.fromJson(reader, ModConfig.class);
+                    if (config != null) {
+                        return config;
+                    }
                 }
             }
         } catch (IOException e) {
             AartBars.LOGGER.error("Failed to load config", e);
         }
+        // Return new config if loading fails
         return new ModConfig();
     }
 

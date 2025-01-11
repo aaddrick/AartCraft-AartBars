@@ -26,13 +26,27 @@ public class AartBarsClient implements ClientModInitializer {
         try {
             LOGGER.info("Initializing Aartcraft ArrowHUD client");
 
-            // Load and validate config
+            // Initialize config with fallback
             config = ModConfig.load();
+            if (config == null) {
+                LOGGER.warn("Failed to load config, using default configuration");
+                config = new ModConfig();
+            }
+
+            // Validate config with error handling
             try {
                 config.validate();
             } catch (IllegalArgumentException e) {
                 LOGGER.error("Invalid configuration values: {}", e.getMessage());
-                config = new ModConfig(); // Fallback to default config
+                // Reset to default config if validation fails
+                config = new ModConfig();
+            }
+
+            // Save config after loading/validation
+            try {
+                config.save();
+            } catch (Exception e) {
+                LOGGER.error("Failed to save config", e);
             }
 
             // Register HUD render callback

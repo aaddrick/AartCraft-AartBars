@@ -1,9 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "aartcraft.aartbars.mixin",
+  "package": "aartcraft.aartbars.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

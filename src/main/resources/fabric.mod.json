@@ -17,13 +17,7 @@
       "aartcraft.aartbars.AartBars"
     ]
   },
-  "mixins": [
-    "aartbars.mixins.json",
-    {
-      "config": "aartbars.client.mixins.json",
-      "environment": "client"
-    }
-  ],
+  "mixins": [],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
